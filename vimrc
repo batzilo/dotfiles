@@ -24,21 +24,23 @@ set incsearch
 "   set mouse=a
 "endif
 
-"Tabs are eight columns wide. Each indentation level is one tab. (Popular with the Linux kernel.)
-"set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+	" Use filetype detection and file-based automatic indenting.
+	filetype plugin indent on
 
-"Tabs are four columns wide. Each indentation level is one tab. (Popular with Windows developers using Visual Studio.)
-"set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+	" Use actual tab chars in Makefiles.
+    autocmd FileType make set tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
+endif
 
-"Each indentation level is four spaces. Tabs are not used. (Popular with Java programmers.)
-"set softtabstop=4 shiftwidth=4 expandtab
-
-" Tabstops are 4 spaces
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-"set expandtab
-set autoindent
+" For everything else, use a tab width of 4 space chars.
+set tabstop=4		" The width of a TAB is set to 4.
+					" Still it is a \t. It is just that
+					" Vim will interpret it to be having
+					" a width of 4.
+set shiftwidth=4	" Indents will have a width of 4.
+set softtabstop=4	" Sets the number of columns for a TAB.
+"set expandtab		" Expand TABs to spaces.
 
 "Put a dollar sign up to the point of editing when using c
 set cpoptions+=$
