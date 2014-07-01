@@ -37,7 +37,7 @@ set incsearch
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-set expandtab
+"set expandtab
 set autoindent
 
 "Put a dollar sign up to the point of editing when using c
