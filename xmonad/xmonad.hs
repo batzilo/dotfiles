@@ -132,6 +132,8 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((modMask,               xK_Return), safeSpawn terminal' ["-e", "bash", "-c", "tmux attach-session || tmux new-session -s main"])
     , ((modMask,               xK_space ), safeSpawn "dmenu_run" ["-b", "-nb", "black"])
     , ((modMask .|. shiftMask, xK_c     ), kill)
+	, ((modMask,               xK_t     ), safeSpawn "terminator" [])
+	, ((modMask,               xK_w     ), safeSpawn "firefox" [])
 
     -- multimedia
     , ((0, xF86XK_AudioRaiseVolume      ), safeSpawn "amixer" ["-q", "set", "Master", "1+"])
