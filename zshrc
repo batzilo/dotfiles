@@ -72,5 +72,3 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games"
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-export TERM=xterm-256color
