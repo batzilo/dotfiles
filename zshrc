@@ -24,7 +24,7 @@ PROMPT="\
 %{$fg[red]%}%(?..[%?] )%{$reset_color%}\
 %{$fg[green]%}%n%{$reset_color%}\
 %{$fg[red]%}@%{$reset_color%}\
-%{$fg[cyan]%}%m%{$reset_color%}\
+%{$fg[cyan]%}%M%{$reset_color%}\
  %{$fg[yellow]%}%~%{$reset_color%}\
  %#\
  "
