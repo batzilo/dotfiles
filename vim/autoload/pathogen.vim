@@ -44,6 +44,7 @@ endfunction
 " Split a path into a list.
 function! pathogen#split(path) abort
   if type(a:path) == type([]) | return a:path | endif
+  if empty(a:path) | return [] | endif
   let split = split(a:path,'\\\@<!\%(\\\\\)*\zs,')
   return map(split,'substitute(v:val,''\\\([\\,]\)'',''\1'',"g")')
 endfunction
@@ -95,7 +96,10 @@ function! pathogen#is_disabled(path) abort
     return 1
   endif
   let sep = pathogen#slash()
-  let blacklist = get(g:, 'pathogen_blacklist', get(g:, 'pathogen_disabled', [])) + pathogen#split($VIMBLACKLIST)
+  let blacklist = map(
+        \ get(g:, 'pathogen_blacklist', get(g:, 'pathogen_disabled', [])) +
+        \ pathogen#split($VIMBLACKLIST),
+        \ 'substitute(v:val, "[\\/]$", "", "")')
   return index(blacklist, fnamemodify(a:path, ':t')) != -1 || index(blacklist, a:path) != -1
 endfunction "}}}1
 

@@ -1,3 +1,12 @@
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
 	url = git@github.com:robbyrussell/oh-my-zsh.git
+[submodule "emmet-vim"]
+	path = vim/bundle/emmet-vim
+	url = git@github.com:mattn/emmet-vim.git
+[submodule "nerdtree"]
+	path = vim/bundle/nerdtree
+	url = git@github.com:scrooloose/nerdtree.git
+[submodule "syntastic"]
+	path = vim/bundle/syntastic
+	url = git@github.com:scrooloose/syntastic.git
