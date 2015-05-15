@@ -20,8 +20,8 @@ set hlsearch
 set incsearch
 
 " In many terminal emulators the mouse works just fine, thus enable it.
-" if has('mouse')
-"   set mouse=a
+"if has('mouse')
+"	set mouse=a
 "endif
 
 " Only do this part when compiled with support for autocommands.
@@ -33,14 +33,15 @@ if has("autocmd")
     autocmd FileType make set tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
 endif
 
-" For everything else, use a tab width of 4 space chars.
-set tabstop=4		" The width of a TAB is set to 4.
-					" Still it is a \t. It is just that
-					" Vim will interpret it to be having
-					" a width of 4.
-set shiftwidth=4	" Indents will have a width of 4.
-set softtabstop=4	" Sets the number of columns for a TAB.
-"set expandtab		" Expand TABs to spaces.
+" For everything else, use a tab width of 8 space chars.
+set tabstop=8 " The width of a TAB is set to 8.
+              " Still it is a \t. It is just that
+              " Vim will interpret it to be having
+              " a width of 8.
+set shiftwidth=8 " Indents will have a width of 8.
+set softtabstop=8 " Sets the number of columns for a TAB.
+set noexpandtab
+"set textwidth=80
 
 "Put a dollar sign up to the point of editing when using c
 set cpoptions+=$
@@ -73,9 +74,9 @@ else
     colorscheme solarized
 endif
 
-au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
-au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
-au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsInfo<CR>
+"au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
+"au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
+"au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsInfo<CR>
 
 "let g:syntastic_auto_loc_list=1
 
