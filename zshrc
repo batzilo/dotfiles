@@ -80,3 +80,9 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+case "$TERM" in
+xterm*|rxvt*)
+    export TERM=xterm-256color
+    ;;
+esac
