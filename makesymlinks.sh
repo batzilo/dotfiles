@@ -8,7 +8,14 @@ set -e
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="bashrc gitconfig oh-my-zsh profile vim vimrc xmonad zshrc"	# list of files/folders to symlink in homedir
+# list of files/folders to symlink in homedir
+files="bashrc \
+	gitconfig \
+	profile \
+	screenrc \
+	vimrc \
+	xmonad \
+	zshrc"
 
 
 # create dotfiles_old in homedir
@@ -29,8 +36,22 @@ for file in $files; do
 		mv ~/.$file ~/dotfiles_old/
 	fi
 	echo "Creating symlink to $file in home directory."
-	ln -s $dir/$file ~/.$file
+	ln -f -s $dir/$file ~/.$file
 done
+
+if [[ -d $dir/vim ]]; then
+	echo "Moving ~/.vim from ~ to $olddir"
+	mv ~/.vim ~/dotfiles_old/
+	echo "Creating symlink to vim in home directory."
+	ln -s $dir/vim ~/.vim
+fi
+
+if [[ -d ~/oh-my-zsh ]]; then
+	echo "Update oh-my-zsh"
+	cd ~/oh-my-zsh
+	git pull
+	cd -
+fi
 
 exit
 
