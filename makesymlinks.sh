@@ -40,8 +40,10 @@ for file in $files; do
 done
 
 if [[ -d $dir/vim ]]; then
-	echo "Moving ~/.vim from ~ to $olddir"
-	mv ~/.vim ~/dotfiles_old/
+	if [[ -d ~/.vim ]]; then
+		echo "Moving ~/.vim from ~ to $olddir"
+		mv ~/.vim ~/dotfiles_old/
+	fi
 	echo "Creating symlink to vim in home directory."
 	ln -s $dir/vim ~/.vim
 fi
