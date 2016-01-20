@@ -51,9 +51,9 @@ if [[ -d $DIR/vim ]]; then
 fi
 
 # update oh-my-zsh
-if [[ -d ~/oh-my-zsh ]]; then
+if [[ -d ~/git/oh-my-zsh ]]; then
 	echo "Updating oh-my-zsh"
-	cd ~/oh-my-zsh
+	cd ~/git/oh-my-zsh
 	git pull
 	cd -
 fi
@@ -63,10 +63,10 @@ install_zsh () {
 	if [ -f /bin/zsh -o -f /usr/bin/zsh ]; then
 		# Clone my oh-my-zsh repository from GitHub
 		# if it isn't already present
-		if [[ ! -d ~/oh-my-zsh ]]; then
+		if [[ ! -d ~/git/oh-my-zsh ]]; then
 			git clone \
 				http://github.com/robbyrussell/oh-my-zsh.git \
-				~/oh-my-zsh
+				~/git/oh-my-zsh
 		fi
 		# Set the default shell to zsh
 		# if it isn't currently set to zsh
