@@ -87,3 +87,5 @@ endif
 
 
 set modeline
+
+set colorcolumn=80
