@@ -14,7 +14,6 @@ FILES="\
 	profile		\
 	screenrc	\
 	vimrc		\
-	xmonad		\
 	zshrc		\
 	"
 
