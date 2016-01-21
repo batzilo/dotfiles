@@ -1,3 +1,11 @@
+# Git submodules
+#
+# # append to this file
+#
+# git submodule init
+# git submodule update
+# git submodule status
+#
 [submodule "emmet-vim"]
 	path = vim/bundle/emmet-vim
 	url = git@github.com:mattn/emmet-vim.git
@@ -7,3 +15,6 @@
 [submodule "syntastic"]
 	path = vim/bundle/syntastic
 	url = git@github.com:scrooloose/syntastic.git
+[submodule "ctrlp"]
+	path = vim/bundle/ctrlp.vim
+	url = git@github.com:kien/ctrlp.vim
