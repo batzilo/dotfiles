@@ -1,97 +1,110 @@
-execute pathogen#infect()
-syntax on
-filetype plugin indent on
+" .vimrc
 
-set t_ut=
-set t_Co=256
 
-set nobackup
-set nu
+" use vim enhancements over old vi compatibility
+set nocompatible
+
+" enable modelines
+" search the first and last 5 lines
+set modeline
+set modelines=5
+
+" set the status line the way Derek Wyatt likes it
+set stl=%f\ %m\ %r\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]
+
+" always display the status line
+set laststatus=2
+
+" show the current mode (Insert, Replace, Visual) on the last line
+set showmode
+
+" show (partial) command in the last line of the screen
+set showcmd
 
 " keep 50 lines of command line history
 set history=50
 
-" show the cursor position all the time
+" show current column and row position
 set ruler
 
+" display line numbers
+set number
+
+" enable syntax highlighting
+syntax on
+
+" display a line at column 80
+set colorcolumn=80
+
+" highlight all search matches
+" (turn off highlight with :noh)
 set hlsearch
 
 " do incremental searching
 set incsearch
 
-" In many terminal emulators the mouse works just fine, thus enable it.
-"if has('mouse')
-"	set mouse=a
-"endif
-
-" Only do this part when compiled with support for autocommands.
-if has("autocmd")
-	" Use filetype detection and file-based automatic indenting.
-	filetype plugin indent on
-
-	" Use actual tab chars in Makefiles.
-    autocmd FileType make set tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
-endif
-
-" For everything else, use a tab width of 8 space chars.
-set tabstop=8 " The width of a TAB is set to 8.
-              " Still it is a \t. It is just that
-              " Vim will interpret it to be having
-              " a width of 8.
-set shiftwidth=8 " Indents will have a width of 8.
-set softtabstop=8 " Sets the number of columns for a TAB.
-set noexpandtab
-"set textwidth=80
-
-"Put a dollar sign up to the point of editing when using c
-set cpoptions+=$
-
-" tell VIM to always put a status line in, even if there is only one window
-set laststatus=2
-
-" Show (partial) command in the last line of the screen
-set showcmd
-
-" Show the current mode
-set showmode
-
-" Set the status line the way derek wyatt likes it
-set stl=%f\ %m\ %r\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]
-
+" hide buffers instead of closing them
+" can open a new buffer without writing changes to current buffer
 set hidden
 
-if has('gui_running')
-    set guifont=Monospace\ 12
-    set guioptions=aegimLt
-    set printoptions=paper:letter
-    syntax enable
-    set background=light
-    colorscheme solarized
-else
-    set background=dark
-    syntax enable
-    let g:solarized_termcolors=256
-    colorscheme solarized
-endif
+" disable Background Color Erase
+" Vim extends the color scheme's background color to the whole terminal screen
+set t_ut=
 
-"au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
-"au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
-"au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsInfo<CR>
+" enable 256 colors in vim
+" put this your .vimrc before setting the colorscheme
+set t_Co=256
 
-"let g:syntastic_auto_loc_list=1
+" the width of a TAB is set to 8. Still it is a \t. It is just that Vim will
+" interpret it to be having a width of 8
+set tabstop=8
 
+" don't expand tab to spaces
+set noexpandtab
+
+" indentation will have a width of 8
+set shiftwidth=8
+
+" how many columns when hitting tab in insert mode
+set softtabstop=8
+
+" this will automatically wrap text as close to 79 characters as white space
+" allows without exceeding the 79 character limit
+set textwidth=80
+
+" put a dollar sign up to the point of editing when using c
+set cpoptions+=$
+
+" enable mouse support
+set mouse=a
+
+" disable beeping (aka "bell") and window flashing
 set noerrorbells visualbell t_vb=
 if has('autocmd')
-  autocmd GUIEnter * set visualbell t_vb=
+	autocmd GUIEnter * set visualbell t_vb=
 endif
 
-set modeline
+" set the colorscheme
+"set background=dark
+let g:solarized_termcolors=256
+colorscheme solarized
 
-set colorcolumn=80
+" highlight trailing whitespace in red
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
 
-set runtimepath^=~/.vim/bundle/ctrlp.vim
+" enable spell checking
+set spell
 
-highlight Foo ctermbg=red guibg=red
-autocmd Syntax * syn match Foo '\%>79v.\+'
-autocmd Syntax * syn match Foo /\s\+$/
-autocmd Syntax * syn match Foo /\t*$/
+
+" "execute pathogen#infect()
+" "filetype plugin indent on
+"
+" set runtimepath^=~/.vim/bundle/ctrlp.vim
+"
+" "let g:syntastic_auto_loc_list=1
+" "let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }

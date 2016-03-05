@@ -20,10 +20,3 @@ fi
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
-
-# set PATH so it includes cabal binaries if it exists
-if [ -d "$HOME/.cabal/bin" ] ; then
-    PATH="$PATH:$HOME/.cabal/bin"
-fi
-
-PATH="/usr/local/heroku/bin:$PATH"
