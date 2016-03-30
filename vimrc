@@ -33,6 +33,12 @@ set number
 " enable syntax highlighting
 syntax on
 
+" Enable file type detection.
+" Use the default filetype settings, so that mail gets 'tw' set to 72,
+" 'cindent' is on in C files, etc.
+" Also load indent files, to automatically do language-dependent indenting.
+filetype plugin indent on
+
 " display a line at column 80
 set colorcolumn=80
 
@@ -100,11 +106,10 @@ autocmd BufWinLeave * call clearmatches()
 " enable spell checking
 set spell
 
+" enable ctrlp.vim
+set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 " "execute pathogen#infect()
-" "filetype plugin indent on
-"
-" set runtimepath^=~/.vim/bundle/ctrlp.vim
 "
 " "let g:syntastic_auto_loc_list=1
 " "let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
