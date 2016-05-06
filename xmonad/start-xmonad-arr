@@ -1,0 +1,131 @@
+#!/bin/bash
+#
+# xmonad startup script. Intended to be run from an xsession configuration
+# to run xmonad and some associated programs.
+#
+# Author: David Brewer
+# Repository: https://github.com/davidbrewer/xmonad-ubuntu-conf
+
+#
+# GENERAL INITIALIZATION
+#
+
+eval `dbus-launch --auto-syntax`
+
+# Identify the home of our gtkrc file, important for setting styles of
+# gtk-based applications
+export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+
+# Load X resources (fixes some font issues)
+xrdb -merge .Xresources
+
+# Start compositing to support transparency. You can omit this
+# if you prefer not to use any transparency, but it is likely to cause
+# ugly black fringing with some programs such as synapse that expect
+# transparency support.
+xcompmgr -n -d $DISPLAY &
+
+
+#
+# SCREEN CONFIGURATION
+#
+RIGHT_END_XMOBAR=0
+
+# We handle our screen configuration using xrandr. You are likely to want to
+# edit this section to match the specific demands of your setup. The below
+# setup is for a Lenovo W520 laptop that sometimes has an external monitor
+# hooked up via either VGA or DVI, positioned to the left of the laptop.
+#
+# Note that you can run xrandr at the command line to get a list of your
+# connected screens and find out what names you should use to refer to them.
+
+HDMI=`xrandr | grep "HDMI-0 connected" | wc -l`
+if [ $HDMI -ne 0 ]; then
+	# Deactivate primary screen
+	xrandr --output LVDS --off
+	# HDMI-0 is now primary screen
+	xrandr --output HDMI-0 --auto --primary
+fi
+
+DP=`xrandr | grep "DisplayPort-0" | wc -l`
+if [ $DP -ne 0 ]; then
+	xrandr --output DisplayPort-0 --auto --right-of HDMI-0
+	RIGHT_END_XMOBAR=`xrandr | grep "DisplayPort-0" | cut -d ' ' -f 3 | cut -d x -f 1`
+fi
+
+
+
+#
+# LOAD SCREEN BACKGROUNDS
+#
+
+# To set your backgrounds, run nitrogren /path/to/images
+nitrogen --restore &
+
+
+#
+# STARTUP ICON TRAY
+#
+
+# We are using stalonetray to create a small icon tray at the
+# top right of the screen. You are likely to want to tweak the
+# size of the icons and the width of the tray based upon the
+# size of your screen and your xmobar configuration. The goal is
+# to make stalonetray look like it is part of xmobar.
+# 
+# Line by line, the options used by default below mean:
+# - icons should be aligned with the "East" or right side of the tray
+# - the width of the tray should be 5 icons wide by one icon tall, and it 
+#   should be located 0 pixels from the right of the screen (-0) and 0 pixels
+#   from the top of the screen (+0).
+# - By setting our maximum geometry to the same thing, the tray will not grow.
+# - The background color of the tray should be black.
+# - This program should not show up in any taskbar.
+# - Icons should be set to size "24".
+# - Kludges argument of "force_icons_size" forces all icons to really, truly 
+#   be the size we set.
+# - window-strut "none" means windows are allowed to cover the tray. In
+#   other words, trust xmonad to handle this part.
+#
+stalonetray \
+  --icon-gravity E \
+  --geometry 5x1-$RIGHT_END_XMOBAR+0 \
+  --max-geometry 5x1-$RIGHT_END_MOBAR+0 \
+  --background '#000000' \
+  --skip-taskbar \
+  --icon-size 19 \
+  --kludges force_icons_size \
+  --window-strut none \
+&
+
+# Run the gnome-keyring-daemon to avoid issues you otherwise may encounter
+# when using gnome applications which expect access to the keyring, such
+# as Empathy. This prevents prompts you may otherwise get for invalid
+# certificates and the like.
+#gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
+
+# Remap caps lock to left control. This is not strictly speaking
+# xmonad related, but it's handy if you're a vim user.
+#setxkbmap -option 'ctrl:nocaps'
+
+# # setup ssh-agent
+# unset SSH_AUTH_SOCK
+# unset SSH_AGENT_PID
+# # set environment variables if user's agent already exists
+# [ -z "$SSH_AUTH_SOCK" ] && SSH_AUTH_SOCK=$(ls -l /tmp/ssh-*/agent.* 2> /dev/null | grep $(whoami) | awk '{print $9}')
+# [ -z "$SSH_AGENT_PID" -a -z "$(echo $SSH_AUTH_SOCK | cut -d. -f2)" ] && SSH_AGENT_PID=$((`echo $SSH_AUTH_SOCK | cut -d. -f2` + 1))
+# [ -n "$SSH_AUTH_SOCK" ] && export SSH_AUTH_SOCK
+# [ -n "$SSH_AGENT_PID" ] && export SSH_AGENT_PID
+# echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK"
+# echo "SSH_AGENT_PID=$SSH_AGENT_PID"
+# # start agent if necessary
+# if [ -z $SSH_AGENT_PID ] && [ -z $SSH_TTY ]; then  # if no agent & not in ssh
+# 	eval `ssh-agent -s` > /dev/null
+# fi
+pkill ssh-agent
+eval `ssh-agent -s`
+ssh-add ~/.ssh/id_rsa
+ssh-add ~/.ssh/id_rsa_arr
+
+# Now, finally, start xmonad
+exec xmonad
