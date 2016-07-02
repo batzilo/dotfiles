@@ -44,7 +44,7 @@ myModMask            = mod4Mask       -- changes the mod key to "super"
 myFocusedBorderColor = "#ff0000"      -- color of focused border
 myNormalBorderColor  = "#cccccc"      -- color of inactive border
 myBorderWidth        = 1              -- width of border around windows
-myTerminal           = "terminator"   -- which terminal software to use
+myTerminal           = "xterm"	      -- which terminal software to use
 myIMRosterTitle      = "Buddy List"   -- title of roster on IM workspace
                                       -- use "Buddy List" for Pidgin, but
                                       -- "Contact List" for Empathy
@@ -87,6 +87,7 @@ myUrgentWSRight = "}"
   as well.
 -}
 
+{-
 myWorkspaces =
   [
     "7:Chat",  "8:Dbg", "9:Pix",
@@ -94,9 +95,17 @@ myWorkspaces =
     "1:Term",  "2:Hub", "3:Mail",
     "0:VM",    "Extr1", "Extr2"
   ]
+-}
 
--- startupWorkspace = "5:Dev"  -- which workspace do you want to be on after launch?
-startupWorkspace = "1:Term"
+myWorkspaces =
+  [
+    "7:Telegram", "8:Doc",    "9:Pix",
+    "4:Mail",     "5:Chrome", "6:Firefox",
+    "1:Term",     "2:Term",   "3:Term",
+    "0:root",     "-:Extr1",  "=:Spotify"
+  ]
+
+startupWorkspace = "1:Term"  -- which workspace do you want to be on after launch?
 
 {-
   Layout configuration. In this section we identify which xmonad
@@ -153,6 +162,7 @@ defaultLayouts = smartBorders(avoidStruts(
 -- Here we define some layouts which will be assigned to specific
 -- workspaces based on the functionality of that workspace.
 
+{-
 -- The chat layout uses the "IM" layout. We have a roster which takes
 -- up 1/8 of the screen vertically, and the remaining space contains
 -- chat windows which are tiled using the grid layout. The roster is
@@ -175,6 +185,9 @@ myLayouts =
   onWorkspace "7:Chat" chatLayout
   $ onWorkspace "9:Pix" gimpLayout
   $ defaultLayouts
+-}
+
+myLayouts = defaultLayouts
 
 
 {-
@@ -206,12 +219,13 @@ myKeyBindings =
     ((myModMask, xK_b), sendMessage ToggleStruts)
     , ((myModMask, xK_a), sendMessage MirrorShrink)
     , ((myModMask, xK_z), sendMessage MirrorExpand)
-    , ((myModMask, xK_p), spawn "synapse")
-    , ((myModMask .|. mod1Mask, xK_space), spawn "synapse")
+    , ((myModMask, xK_p), spawn "dmenu_run -b")
+--    , ((myModMask .|. mod1Mask, xK_space), spawn "dmenu_run -b")
     , ((myModMask, xK_u), focusUrgent)
     , ((0, 0x1008FF12), spawn "amixer -q set Master toggle")
     , ((0, 0x1008FF11), spawn "amixer -q set Master 10%-")
     , ((0, 0x1008FF13), spawn "amixer -q set Master 10%+")
+    , ((myModMask .|. shiftMask, xK_l), spawn "/home/batzilo/bin/lock_screen.sh")
     , ((myModMask .|. shiftMask, xK_s), spawn "/home/batzilo/bin/lock_screen_and_sleep.sh")
   ]
 
