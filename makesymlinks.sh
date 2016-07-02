@@ -4,8 +4,8 @@
 
 set -e
 
-DIR=~/git/dotfiles		# dotfiles directory
-OLDDIR=~/git/dotfiles_old	# old dotfiles backup directory
+DIR=~/src/dotfiles		# dotfiles directory
+OLDDIR=~/src/dotfiles_old	# old dotfiles backup directory
 
 # list of files/folders to symlink in homedir
 FILES="\
@@ -14,7 +14,8 @@ FILES="\
 	profile		\
 	screenrc	\
 	vimrc		\
-	zshrc		\
+	xmonad		\
+	Xresources	\
 	"
 
 # create dotfiles_old in homedir
@@ -78,7 +79,7 @@ install_zsh () {
 	fi
 }
 
-install_zsh
+#install_zsh
 
 echo
 echo "Done!"
