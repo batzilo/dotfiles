@@ -1,3 +1,9 @@
 [user]
 	name = Vasilis Souleles
-	email = vasilis.souleles@gmail.com
+	email = vsoul@arrikto.com
+[core]
+	editor = vim
+[color]
+	ui = true
+[alias]
+	tree = log --graph --decorate --pretty=oneline --abbrev-commit

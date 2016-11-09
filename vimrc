@@ -85,7 +85,13 @@ if has('autocmd')
   autocmd GUIEnter * set visualbell t_vb=
 endif
 
-
 set modeline
 
 set colorcolumn=80
+
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+
+highlight Foo ctermbg=red guibg=red
+autocmd Syntax * syn match Foo '\%>79v.\+'
+autocmd Syntax * syn match Foo /\s\+$/
+autocmd Syntax * syn match Foo /\t*$/
