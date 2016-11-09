@@ -118,3 +118,8 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 "
 " "let g:syntastic_auto_loc_list=1
 " "let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+
+" Do not auto ident the line when I insert a colon
+" http://stackoverflow.com/questions/19320747/prevent-vim-from-indenting-line-when-typing-a-colon-in-python
+autocmd FileType python setlocal indentkeys-=<:>
+autocmd FileType python setlocal indentkeys-=:
