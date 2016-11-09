@@ -39,7 +39,7 @@
 #     #/usr/bin/python -O /usr/share/wicd/gtk/wicd-client.py --no-tray &
 #     /usr/bin/python -O /usr/share/wicd/gtk/wicd-client.py &
 # fi
-/usr/bin/python -O /usr/share/wicd/gtk/wicd-client.py --tray &
+#/usr/bin/python -O /usr/share/wicd/gtk/wicd-client.py --tray &
 
 # if [ hash /opt/telegram/Telegram 2>/dev/null -a -z "$(pgrep Telegram)" ] ; then
 # 	/opt/telegram/Telegram &
@@ -52,9 +52,9 @@
 #
 
 # Use synapse as our app launcher. (-s: don't display until requested) 
-if [ -z "$(pgrep synapse)" ] ; then
-    synapse -s &
-fi
+#if [ -z "$(pgrep synapse)" ] ; then
+#    synapse -s &
+#fi
 
 # On login, we unlock the ssh keychain so we're not prompted for 
 # passphrases later. We pipe /dev/null to ssh-add to make it realize 
