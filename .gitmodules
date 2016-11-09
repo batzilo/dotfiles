@@ -1,17 +1,12 @@
 # Git submodules
 #
-# # append to this file
+# This is a configuration file that stores the mapping between the
+# project's URL and the local subdirectory you've pulled it into
 #
 # git submodule init
 # git submodule update
 # git submodule status
 #
-[submodule "emmet-vim"]
-	path = vim/bundle/emmet-vim
-	url = git@github.com:mattn/emmet-vim.git
-[submodule "nerdtree"]
-	path = vim/bundle/nerdtree
-	url = git@github.com:scrooloose/nerdtree.git
 [submodule "syntastic"]
 	path = vim/bundle/syntastic
 	url = git@github.com:scrooloose/syntastic.git
