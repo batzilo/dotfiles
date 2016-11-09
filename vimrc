@@ -49,6 +49,11 @@ set hlsearch
 " do incremental searching
 set incsearch
 
+set ignorecase
+
+" type small case will search case independent, type mixed case will use exact
+set smartcase
+
 " hide buffers instead of closing them
 " can open a new buffer without writing changes to current buffer
 set hidden
