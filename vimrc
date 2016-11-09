@@ -99,6 +99,7 @@ endif
 "set background=dark
 let g:solarized_termcolors=256
 colorscheme solarized
+colorscheme xoria256
 
 " highlight trailing whitespace in red
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -114,12 +115,20 @@ set spell
 " enable ctrlp.vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
-" "execute pathogen#infect()
-"
-" "let g:syntastic_auto_loc_list=1
-" "let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-
-" Do not auto ident the line when I insert a colon
+" Do not auto indent the line when I insert a colon
 " http://stackoverflow.com/questions/19320747/prevent-vim-from-indenting-line-when-typing-a-colon-in-python
 autocmd FileType python setlocal indentkeys-=<:>
 autocmd FileType python setlocal indentkeys-=:
+
+" Enable Tim Popes' pathogen
+execute pathogen#infect()
+
+" Syntastic's recommended settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
