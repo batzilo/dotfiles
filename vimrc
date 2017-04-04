@@ -100,6 +100,7 @@ endif
 let g:solarized_termcolors=256
 colorscheme solarized
 colorscheme xoria256
+colorscheme monokai
 
 " highlight trailing whitespace in red
 highlight ExtraWhitespace ctermbg=red guibg=red
