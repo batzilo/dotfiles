@@ -143,3 +143,6 @@ set spell
 " https://github.com/nvie/vim-flake8
 autocmd BufWritePost *.py call Flake8()
 let g:flake8_show_in_gutter = 1
+
+" Settings for html files
+autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab shiftwidth=2 softtabstop=2 textwidth=0 colorcolumn=0
