@@ -138,3 +138,8 @@ let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_
 set spelllang=en_us,el
 set spellfile=~/.vim/spell/en.utf-8.add " FIXME: A better path for this?
 set spell
+
+" Run flake8 inside vim
+" https://github.com/nvie/vim-flake8
+autocmd BufWritePost *.py call Flake8()
+let g:flake8_show_in_gutter = 1
