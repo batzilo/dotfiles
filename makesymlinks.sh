@@ -10,9 +10,11 @@ OLDDIR=~/src/dotfiles_old	# old dotfiles backup directory
 # list of files/folders to symlink in homedir
 FILES="\
 	bashrc		\
+	bin		\
 	gitconfig	\
 	profile		\
 	screenrc	\
+	vim		\
 	vimrc		\
 	xmonad		\
 	Xresources	\
