@@ -1,23 +1,27 @@
-! Set the TERM env var
+! Set the TERM environment variable
 xterm*termName: xterm-256color
 
-! support UTF-8
-XTerm*locale: true
+! Add UTF-8 support
+xterm*utf8: 1
 
-! Use a nice truetype font and size by default...
+! Force xterm to follow your locale
+xterm*locale: true
+
+! Use a nice truetype font and size
 xterm*faceName: DejaVu Sans Mono Book
-xterm*faceSize: 10
+xterm*faceSize: 12
 
-! Every shell is a login shell by default (for inclusion of all necessary environment variables)
+! Every shell is a login shell
+! Include all necessary environment variables
 xterm*loginshell: true
 
-! I like a LOT of scrollback...
-Xterm*saveLines: 4096
+! Add a lot of scrollback
+xterm*saveLines: 4096
 
-! double-click to select whole URLs :D
+! Use double-click to select whole URLs
 xterm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 
-! DOS-box colours...
+! Use DOS-box-like colors
 xterm*foreground: rgb:a8/a8/a8
 xterm*background: rgb:00/00/00
 xterm*color0: rgb:00/00/00
@@ -37,13 +41,14 @@ xterm*color13: rgb:fc/54/fc
 xterm*color14: rgb:54/fc/fc
 xterm*color15: rgb:fc/fc/fc
 
-! no scrollbar...
+! Do not show a scrollbar
 xterm*ScrollBar: false
 
-! stop output to terminal from jumping down to bottom of scroll again
+! Stop output to terminal from jumping down to bottom of scroll again
 xterm*scrollTtyOutput: false
 
-! always display 'xterm' as xterm title ?
+! Always display 'xterm' as xterm title
 xterm*allowTitleOps: false
 
-XTerm*transparent: true
+! Make xterm transparent
+!xterm*transparent: true
