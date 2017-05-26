@@ -1,5 +1,0 @@
-if [ -x /etc/X11/xinit/xinitrc ] ; then
-	. /etc/X11/xinit/xinitrc
-fi
-
-exec /home/batzilo/.xmonad/start-xmonad-arr
