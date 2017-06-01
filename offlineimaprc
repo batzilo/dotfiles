@@ -1,0 +1,34 @@
+# offlineimaprc
+# vim: set nospell:
+#
+# Links:
+# http://www.offlineimap.org/
+# http://stevelosh.com/blog/2012/10/the-homely-mutt/#retrieving-passwords
+# https://wiki.archlinux.org/index.php/OfflineIMAP
+# http://jgoerzen.github.io/offlineimap/manual.html
+
+[general]
+accounts = vsoul_arr
+maxsyncaccounts = 1
+ui = TTYUI
+pythonfile = ~/.offlineimap.py
+fsync = false
+
+[Account vsoul_arr]
+localrepository = local_vsoul_arr
+remoterepository = remote_vsoul_arr
+#presynchook = offlineimap_presync_hook
+#postsynchook = offlineimap_postsync_hook
+
+[Repository local_vsoul_arr]
+type = Maildir
+localfolders = ~/.mail/local_vsoul_arr
+
+[Repository remote_vsoul_arr]
+type = IMAP
+starttls = yes
+remotehost = mail.arr
+remoteport = 143
+remoteuser = vsoul
+remotepasseval = vsoul_arr_get_pass()
+maxconnections = 1

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo -n "This is the offlineimap presync hook"
+
+exit 0
