@@ -9,7 +9,7 @@ xterm*locale: true
 
 ! Use a nice truetype font and size
 xterm*faceName: DejaVu Sans Mono Book
-xterm*faceSize: 12
+xterm*faceSize: 10
 
 ! Every shell is a login shell
 ! Include all necessary environment variables
