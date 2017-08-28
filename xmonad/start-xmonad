@@ -78,10 +78,10 @@ if [ $(hostname) == "kurt" ]; then
 	HDMI1=`xrandr | grep 'HDMI1 connected' | wc -l`
 	HDMI2=`xrandr | grep 'HDMI2 connected' | wc -l`
 	if [ $HDMI1 -ne 0 -a $HDMI2 -ne 0 ]; then
-		xrandr --output HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --primary
-		xrandr --output HDMI2 --mode 1920x1080 --pos 1920x0 --rotate normal
+		xrandr --output eDP1 --primary --mode 1600x900 --pos 0x0 --rotate normal
+		xrandr --output HDMI1 --mode 1920x1080 --pos 1600x0 --rotate normal
+		xrandr --output HDMI2 --mode 1920x1080 --pos 3520x0 --rotate normal
 		xrandr --output DP1 --off
-		xrandr --output eDP1 --off
 		xrandr --output VIRTUAL1 --off
 	fi
 fi
