@@ -25,7 +25,7 @@ xrdb -merge ~/.Xresources
 # # if you prefer not to use any transparency, but it is likely to cause
 # # ugly black fringing with some programs such as synapse that expect
 # # transparency support.
-# xcompmgr -n -d $DISPLAY &
+xcompmgr -n -d $DISPLAY &
 
 # Start the xscreensaver daemon
 xscreensaver -no-splash &
