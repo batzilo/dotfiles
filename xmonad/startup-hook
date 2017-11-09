@@ -84,3 +84,6 @@
 # # device
 # TOUCHPAD_ID=`xinput | grep 'Synaptics TouchPad' | cut -f 2 | cut -f 2 -d =`
 # xinput set-prop $TOUCHPAD_ID "Device Enabled" 0
+
+# Use a nice pointy cursor
+xsetroot -cursor_name left_ptr
