@@ -114,3 +114,7 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\
 
 # Add xterm transparency
 [ -n "$XTERM_VERSION" ] && transset 0.8 --id "$WINDOWID" >/dev/null
+
+# Support virtualenvwrapper
+export WORKON_HOME=~/.venvs
+source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
