@@ -146,3 +146,7 @@ let g:flake8_show_in_gutter = 1
 
 " Settings for html files
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab shiftwidth=2 softtabstop=2 textwidth=0 colorcolumn=0
+
+" Set the Normal group background terminal color to none
+" so that vim has the same transparency as xterm
+highlight Normal ctermbg=none
