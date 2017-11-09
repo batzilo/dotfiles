@@ -86,8 +86,8 @@ set textwidth=80
 " put a dollar sign up to the point of editing when using c
 set cpoptions+=$
 
-" enable mouse support
-set mouse=a
+" disable mouse support
+set mouse=
 
 " disable beeping (aka "bell") and window flashing
 set noerrorbells visualbell t_vb=
