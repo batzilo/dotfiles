@@ -9,7 +9,9 @@
 #
 [submodule "syntastic"]
 	path = vim/bundle/syntastic
-	url = git@github.com:scrooloose/syntastic.git
+	# url = git@github.com:scrooloose/syntastic.git
+	url = https://github.com/scrooloose/syntastic.git
 [submodule "ctrlp"]
 	path = vim/bundle/ctrlp.vim
-	url = git@github.com:ctrlpvim/ctrlp.vim
+	# url = git@github.com:ctrlpvim/ctrlp.vim
+	url = https://github.com/ctrlpvim/ctrlp.vim
