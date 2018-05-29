@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# makesymlinks.sh
+# A script to create symbolic links for all dotfiles to user's home directory
 
 set -e
 
