@@ -12,7 +12,7 @@ res = subprocess.check_output(command, shell=True)
 num_screens = int(res)
 
 os.chdir(os.path.expanduser("~"))
-files = glob.glob("Dropbox/wallpapers/*")
+files = glob.glob("wallpapers/*")
 random.shuffle(files)
 
 command = "feh --no-fehbg --bg-fill " + " ".join(files[0:num_screens])
