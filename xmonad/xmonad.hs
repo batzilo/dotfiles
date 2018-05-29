@@ -44,7 +44,7 @@ myModMask            = mod4Mask       -- changes the mod key to "super"
 myFocusedBorderColor = "#ff0000"      -- color of focused border
 myNormalBorderColor  = "#cccccc"      -- color of inactive border
 myBorderWidth        = 1              -- width of border around windows
-myTerminal           = "xterm"	      -- which terminal software to use
+myTerminal           = "xterm"        -- which terminal software to use
 myIMRosterTitle      = "Buddy List"   -- title of roster on IM workspace
                                       -- use "Buddy List" for Pidgin, but
                                       -- "Contact List" for Empathy
@@ -225,8 +225,8 @@ myKeyBindings =
     , ((0, 0x1008FF12), spawn "amixer -q set Master toggle")
     , ((0, 0x1008FF11), spawn "amixer -q set Master 10%-")
     , ((0, 0x1008FF13), spawn "amixer -q set Master 10%+")
-    , ((myModMask .|. shiftMask, xK_l), spawn "/home/batzilo/bin/lock_screen.sh")
-    , ((myModMask .|. shiftMask, xK_s), spawn "/home/batzilo/bin/lock_screen_and_sleep.sh")
+    , ((myModMask .|. shiftMask, xK_l), spawn "~/.bin/lock_screen.sh")
+    , ((myModMask .|. shiftMask, xK_s), spawn "~/.bin/lock_screen_and_sleep.sh")
   ]
 
 
