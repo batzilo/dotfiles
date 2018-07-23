@@ -7,3 +7,17 @@
 	ui = true
 [alias]
 	tree = log --graph --decorate --pretty=oneline --abbrev-commit --date=relative --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset by %C(yellow)%ae%Creset'
+
+[user]
+	name = Vasilis Souleles
+	email = vsoul@arrikto.com
+[sendemail]
+	envelopesender = vsoul@arrikto.com
+	smtpencryption = tls
+	smtpserver = mail.arr
+	smtpserverport = 25
+	smtpuser = vsoul
+	smtpsslcertpath = /etc/ssl/certs/arrikto-ca.crt
+	suppressfrom = true
+	suppresscc = all
+	chainreplyto = false

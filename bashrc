@@ -114,3 +114,9 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\
 
 # Add xterm transparency
 #[ -n "$XTERM_VERSION" ] && transset 0.8 --id "$WINDOWID" >/dev/null
+
+alias dv="/home/batzilo/deploy_vasa_to_rok1-0.sh"
+alias dv="/home/batzilo/deploy_vasa_to_borg1.dev.arr.sh"
+alias dr="/home/batzilo/deploy_rok_to_rok1-0.sh"
+alias dr="/home/batzilo/deploy_rok_gw_to_borg1.dev.arr.sh"
+alias drv="cd /home/batzilo/src/rok/src/peers/gw/rok_gw_services/drivers"

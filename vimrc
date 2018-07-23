@@ -81,7 +81,7 @@ set softtabstop=8
 
 " this will automatically wrap text as close to 79 characters as white space
 " allows without exceeding the 79 character limit
-set textwidth=80
+set textwidth=79
 
 " put a dollar sign up to the point of editing when using c
 set cpoptions+=$
