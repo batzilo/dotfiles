@@ -10,3 +10,5 @@ xmonad/xmonad.o
 xmonad/xinitrc_xmonad.log
 xmonad/xinit.log
 xmonad/xmonad
+local.gitconfig
+arrikto.gitconfig

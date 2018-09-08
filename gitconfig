@@ -1,6 +1,9 @@
 [user]
-	name = Vasilis Souleles
-	email = vasilis.souleles@gmail.com
+	name = Vasileios Souleles
+	email = hidden.from@github.com
+[include]
+	path = ~/.local.gitconfig
+	path = ~/.arrikto.gitconfig
 [core]
 	editor = vim
 [color]
