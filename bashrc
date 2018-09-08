@@ -121,3 +121,6 @@ export LESS=-j.5
 # Support virtualenvwrapper
 export WORKON_HOME=~/.venvs
 source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+
+# A helpful shortcut for pretty rewriting a branch history since develop
+alias grid='git rebase -i develop'
