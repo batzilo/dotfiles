@@ -6,6 +6,19 @@
 
 set -e
 
+while :
+do
+        case "$1" in
+                "-v" | "--verbose")
+                        # be verbose
+                        set -x
+                        ;;
+                *)
+                        ;;
+        esac
+        shift || break
+done
+
 : "${TARGET_USER:=batzilo}"
 
 : "${SRC_DIR:=/home/$TARGET_USER/src/dotfiles}"
