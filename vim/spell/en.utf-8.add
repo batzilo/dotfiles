@@ -195,3 +195,15 @@ VMFS
 UI
 UUID
 LUN
+CMD
+jboss
+wildfly
+LUKS
+unencrypted
+decrypt
+partitions
+MiB
+Repo
+repo
+debian
+thunderbird
