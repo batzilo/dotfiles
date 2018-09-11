@@ -116,7 +116,7 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\
 [ -n "$XTERM_VERSION" ] && transset 0.8 --id "$WINDOWID" >/dev/null
 
 # Make less display the search result in the center rather than on top
-export LESS=-j.5
+# export LESS=-j.5
 
 # Support virtualenvwrapper
 export WORKON_HOME=~/.venvs
