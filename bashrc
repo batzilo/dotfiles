@@ -124,3 +124,19 @@ source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 
 # A helpful shortcut for pretty rewriting a branch history since develop
 alias grid='git rebase -i develop'
+
+# Start the ssh agent, add all private keys
+if [ ! -S ~/.ssh/ssh_auth_sock ]; then
+	mkdir -p ~/.ssh
+	eval `ssh-agent`
+	ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+	if [ -d ~/ssh_keys ];
+	then
+		# find ~/ssh_keys -type f -name id_rsa* | grep -v ".pub$" | xargs -I foo ssh-add foo
+		for priv_key in `find ~/ssh_keys -type f -name id_rsa* | grep -v ".pub$"`;
+		do
+			ssh-add $priv_key
+		done
+	fi
+fi
+export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
