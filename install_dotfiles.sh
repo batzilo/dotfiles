@@ -73,7 +73,7 @@ done
 unset file
 
 for maybe_file in $MAYBE_DOTFILES; do
-	if [ -f "$maybe_file" ];
+	if [ -f "$SRC_DIR/$maybe_file" ];
 	then
 		echo "Creating a symbolic link of '$SRC_DIR/$maybe_file' to '$DST_DIR/.$maybe_file'"
 		ln -f -s $SRC_DIR/$maybe_file $DST_DIR/.$maybe_file
