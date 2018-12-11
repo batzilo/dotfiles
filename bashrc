@@ -140,3 +140,7 @@ if [ ! -S ~/.ssh/ssh_auth_sock ]; then
 	fi
 fi
 export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+
+# Set up SDKMAN
+export SDKMAN_DIR="~/.sdkman"
+[[ -s "~/.sdkman/bin/sdkman-init.sh" ]] && source "~/.sdkman/bin/sdkman-init.sh"
