@@ -57,6 +57,7 @@ DOTFILES="\
 MAYBE_DOTFILES="\
 	local.gitconfig   \
 	arrikto.gitconfig \
+	blueground.gitconfig \
 	"
 
 DOTDIRS="\

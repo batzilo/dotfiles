@@ -4,6 +4,7 @@
 [include]
 	path = ~/.local.gitconfig
 	path = ~/.arrikto.gitconfig
+	path = ~/.blueground.gitconfig
 [core]
 	editor = vim
 [color]
