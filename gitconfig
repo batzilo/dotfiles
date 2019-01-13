@@ -11,6 +11,6 @@
 	ui = true
 [alias]
 	tree = log --graph --decorate --pretty=oneline --abbrev-commit --date=relative --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset by %C(yellow)%ae%Creset'
-	dog = log --decorate --oneline --graph
+	dog = log --decorate --oneline --graph --abbrev-commit
 [push]
 	default = simple
