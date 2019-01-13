@@ -152,4 +152,4 @@ colorscheme monokai
 let g:netrw_dirhistmax = 0
 
 " Get nice 2-space YAML files
-autocmd FileType yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+autocmd FileType yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab nospell
