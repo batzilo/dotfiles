@@ -34,6 +34,7 @@ import XMonad.Hooks.UrgencyHook
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
 import Data.Ratio ((%))
+import Graphics.X11.ExtraTypes.XF86
 
 {-
   Xmonad configuration variables. These settings control some of the
@@ -227,6 +228,8 @@ myKeyBindings =
     , ((0, 0x1008FF13), spawn "amixer -q set Master 10%+")
     , ((myModMask .|. shiftMask, xK_l), spawn "~/.bin/lock_screen.sh")
     , ((myModMask .|. shiftMask, xK_s), spawn "~/.bin/lock_screen_and_sleep.sh")
+    , ((0, xF86XK_MonBrightnessUp), spawn "~/.bin/brightness.sh inc")
+    , ((0, xF86XK_MonBrightnessDown), spawn "~/.bin/brightness.sh dec")
   ]
 
 
