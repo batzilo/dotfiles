@@ -142,12 +142,12 @@ autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab shiftwidth=2 sof
 highlight Normal ctermbg=none
 
 " Set the color scheme
-"set background=dark
+set background=light
 let g:solarized_termcolors=256
 colorscheme solarized
-colorscheme xoria256
-colorscheme monokai
-colorscheme mustang
+" colorscheme xoria256
+" colorscheme monokai
+" colorscheme mustang
 
 " Do not maintain a history file of all the directories that were modified
 let g:netrw_dirhistmax = 0
