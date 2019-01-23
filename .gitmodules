@@ -7,9 +7,15 @@
 # git submodule update
 # git submodule status
 #
+# To add a new submodule, use:
+# $ git submodule add git@github.com:foo/bar.git path/to/foo/bar
+#
 [submodule "syntastic"]
 	path = vim/bundle/syntastic
 	url = git@github.com:scrooloose/syntastic.git
 [submodule "ctrlp"]
 	path = vim/bundle/ctrlp.vim
 	url = git@github.com:ctrlpvim/ctrlp.vim
+[submodule "Jenkinsfile-vim-syntax"]
+	path = vim/bundle/Jenkinsfile-vim-syntax
+	url = git@github.com:martinda/Jenkinsfile-vim-syntax.git
