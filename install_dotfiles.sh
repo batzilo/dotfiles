@@ -62,6 +62,7 @@ MAYBE_DOTFILES="\
 
 DOTDIRS="\
 	bin    \
+	fonts  \
 	vim    \
 	xmonad \
 	"
