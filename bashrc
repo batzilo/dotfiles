@@ -142,8 +142,8 @@ fi
 export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
 
 # Set up SDKMAN
-export SDKMAN_DIR="~/.sdkman"
-[[ -s "~/.sdkman/bin/sdkman-init.sh" ]] && source "~/.sdkman/bin/sdkman-init.sh"
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 
 # Start screen by default
 if [ "$TERM" != "linux" -a -z "$STY" ]; then
