@@ -13,3 +13,6 @@ xmonad/xmonad
 local.gitconfig
 arrikto.gitconfig
 blueground.gitconfig
+
+# Ignore the binary version of vim spellbooks
+vim/spell/*.spl
