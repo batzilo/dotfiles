@@ -53,6 +53,9 @@ xterm*allowTitleOps: false
 ! Make xterm transparent
 xterm*transparent: true
 
+! Turn off xterm visual bell
+xterm*visualBell: false
+
 
 !! Molokai theme
 !xterm*background: #101010
