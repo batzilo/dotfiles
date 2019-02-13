@@ -144,10 +144,11 @@ highlight Normal ctermbg=none
 " Set the color scheme
 set background=light
 let g:solarized_termcolors=256
-colorscheme solarized
+" colorscheme solarized
 " colorscheme xoria256
 " colorscheme monokai
 " colorscheme mustang
+colorscheme monokai
 
 " Do not maintain a history file of all the directories that were modified
 let g:netrw_dirhistmax = 0
