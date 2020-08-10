@@ -86,8 +86,8 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-#alias ll='ls -l'
-#alias la='ls -A'
+alias ll='ls -l'
+alias la='ls -al'
 #alias l='ls -CF'
 
 # Alias definitions.
@@ -110,7 +110,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[00m\]$(__git_ps1) \$ '
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[00m\]$(__git_ps1) [$?] \$ '
 
 # Add xterm transparency
 [ -n "$XTERM_VERSION" ] && transset 0.8 --id "$WINDOWID" >/dev/null
