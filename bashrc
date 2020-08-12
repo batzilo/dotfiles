@@ -118,9 +118,12 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\
 # Make less display the search result in the center rather than on top
 # export LESS=-j.5
 
-# Support virtualenvwrapper
-export WORKON_HOME=~/.venvs
-source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+# Commented out by vsoul in Wed Aug 12 13:28:10 EEST 2020
+# because virtualenvwrapper only works well with Python 2, not Python 3
+# When in Python 3, use pyenv
+# # Support virtualenvwrapper
+# export WORKON_HOME=~/.venvs
+# source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 
 # A helpful shortcut for pretty rewriting a branch history since develop
 alias grid='git rebase -i develop'
