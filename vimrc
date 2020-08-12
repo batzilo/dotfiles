@@ -110,6 +110,7 @@ set spell
 
 " Enable the "ctrlp.vim" plugin
 set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " Do not auto indent the line when a colon is inserted
 " http://stackoverflow.com/questions/19320747/prevent-vim-from-indenting-line-when-typing-a-colon-in-python
@@ -133,6 +134,7 @@ let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive
 " https://github.com/nvie/vim-flake8
 autocmd BufWritePost *.py call Flake8()
 let g:flake8_show_in_gutter = 1
+let g:syntastic_python_checkers = ['flake8']
 
 " Settings for html files
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab shiftwidth=2 softtabstop=2 textwidth=0 colorcolumn=0
@@ -148,10 +150,34 @@ let g:solarized_termcolors=256
 " colorscheme xoria256
 " colorscheme monokai
 " colorscheme mustang
-colorscheme monokai
+colorscheme solarized
 
 " Do not maintain a history file of all the directories that were modified
 let g:netrw_dirhistmax = 0
 
 " Get nice 2-space YAML files
 autocmd FileType yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab nospell
+" Do not auto indent the line when a # is inserted
+autocmd FileType yaml setlocal indentkeys-=0#
+
+
+" " Setting for folding
+" "
+" " Fold based on indent
+" set foldmethod=indent
+" " Do not fold by default
+" set nofoldenable
+" " The number of | or numbers displayed
+" set foldcolumn=1
+" " The deepest fold is 10 levels
+" " set foldnestmax=10
+set foldmethod=manual
+
+" Get nice 2-space JS files
+autocmd FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab nospell
+
+" Get nice 2-space Java files
+autocmd FileType java setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab nospell
+
+" Get nice 2-space Groovy files
+autocmd FileType groovy setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab nospell
