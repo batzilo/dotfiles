@@ -204,10 +204,11 @@ if [ "$TERM" != "linux" -a -z "$STY" ]; then
 	exec screen -A
 fi
 
-
 export PYENV_ROOT="$HOME/src/pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
 	eval "$(pyenv init -)"
-	eval "$(pyenv virtualenv-init -)"
+	# The following line makes bash slow!
+	# See https://github.com/pyenv/pyenv/issues/784
+	# eval "$(pyenv virtualenv-init -)"
 fi
