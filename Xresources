@@ -8,12 +8,11 @@ xterm*utf8: 1
 xterm*locale: true
 
 ! Use a nice truetype font and size
-! xterm*faceName: DejaVu Sans Mono Book
-! xterm*faceSize: 10
+!xterm*faceName: DejaVu Sans Mono Book
+xterm*faceName: Consolas
+!xterm*faceName: RobotoMono
+xterm*faceSize: 18
 xterm*renderFont: true
-! xterm*faceName: Consolas
-xterm*faceName: RobotoMono
-xterm*faceSize: 11
 
 ! Every shell is a login shell
 ! Include all necessary environment variables

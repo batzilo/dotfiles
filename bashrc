@@ -110,7 +110,58 @@ if ! shopt -oq posix; then
   fi
 fi
 
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[00m\]$(__git_ps1) [$?] \$ '
+# A simple bash prompt, broken up into pieces
+# The chroot thingy
+SIMPLE_PROMPT='${debian_chroot:+($debian_chroot)}'
+# Start with the green color
+SIMPLE_PROMPT=$SIMPLE_PROMPT'\[\033[01;32m\]'
+# An actual [
+SIMPLE_PROMPT=$SIMPLE_PROMPT'\[\033[01;32m\][ '
+# The username
+SIMPLE_PROMPT=$SIMPLE_PROMPT'\[\033[01;32m\]\u '
+# An actual @
+SIMPLE_PROMPT=$SIMPLE_PROMPT'\[\033[01;34m\]@ '
+# A hostname
+SIMPLE_PROMPT=$SIMPLE_PROMPT'\[\033[01;32m\]\h '
+# A blue path
+SIMPLE_PROMPT=$SIMPLE_PROMPT'\[\033[01;34m\]\w '
+# An actual ]
+SIMPLE_PROMPT=$SIMPLE_PROMPT'\[\033[01;32m\]] '
+# The last exit code
+SIMPLE_PROMPT=$SIMPLE_PROMPT'[$?]'
+# Reset color
+SIMPLE_PROMPT=$SIMPLE_PROMPT'\[\033[00m\]'
+# The git portion
+SIMPLE_PROMPT=$SIMPLE_PROMPT'$(__git_ps1) '
+# An actual $
+SIMPLE_PROMPT=$SIMPLE_PROMPT'\$ '
+
+# A bash prompt stolen from Luke Smith, broken up into pieces
+# The chroot thingy
+LUKE_SMITH_PROMPT='${debian_chroot:+($debian_chroot)}'
+# A red [
+LUKE_SMITH_PROMPT=$LUKE_SMITH_PROMPT'\[\033[1;31m\][ '
+# A yellow username
+LUKE_SMITH_PROMPT=$LUKE_SMITH_PROMPT'\[\033[1;33m\]\u '
+# A green @
+LUKE_SMITH_PROMPT=$LUKE_SMITH_PROMPT'\[\033[1;32m\]@ '
+# A blue hostname
+LUKE_SMITH_PROMPT=$LUKE_SMITH_PROMPT'\[\033[1;34m\]\h '
+# A magenta path
+LUKE_SMITH_PROMPT=$LUKE_SMITH_PROMPT'\[\033[1;35m\]\w '
+# A red ]
+LUKE_SMITH_PROMPT=$LUKE_SMITH_PROMPT'\[\033[1;31m\]] '
+# The last exit code in red
+LUKE_SMITH_PROMPT=$LUKE_SMITH_PROMPT'\[\033[1;31m\][$?]'
+# Reset color
+LUKE_SMITH_PROMPT=$LUKE_SMITH_PROMPT'\[\033[00m\]'
+# The git portion
+LUKE_SMITH_PROMPT=$LUKE_SMITH_PROMPT'$(__git_ps1) '
+# An actual $
+LUKE_SMITH_PROMPT=$LUKE_SMITH_PROMPT'\$ '
+
+# Set the bash prompt
+PS1=$LUKE_SMITH_PROMPT
 
 # Add xterm transparency
 [ -n "$XTERM_VERSION" ] && transset 0.8 --id "$WINDOWID" >/dev/null
