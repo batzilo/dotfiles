@@ -1,11 +1,15 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+#
+# ~/.bashrc
+#
+# Executed by (non-login) bash shells.
+#
+# For consistency, use 4 spaces for indentation.
+#
 
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
-      *) return;;
+    *) return;;
 esac
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -47,12 +51,12 @@ force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+        # We have color support; assume it's compliant with Ecma-48
+        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+        # a case would tend to support setf rather than setaf.)
+        color_prompt=yes
     else
-	color_prompt=
+        color_prompt=
     fi
 fi
 
@@ -79,7 +83,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
-
     #alias grep='grep --color=auto'
     #alias fgrep='fgrep --color=auto'
     #alias egrep='egrep --color=auto'
@@ -103,14 +106,60 @@ fi
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+        . /usr/share/bash-completion/bash_completion
+    elif [ -f /etc/bash_completion ]; then
+        . /etc/bash_completion
+    fi
 fi
 
-# A simple bash prompt, broken up into pieces
+#
+# Section: Set the PATH environment variable.
+#
+
+# Add a directory to PATH, if it's not already added.
+# https://superuser.com/questions/39751
+pathadd() {
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+        # Put the new directory at the beginning of PATH.
+        PATH="$1${PATH:+":$PATH"}"
+    fi
+}
+
+# Include "~/.bin" to PATH if it exists.
+if [ -d "$HOME/.bin" ]; then
+    pathadd "$HOME/.bin"
+fi
+
+# Set up SDKMAN.
+# Commented out, I don't use SDKMAN anymore.
+# export SDKMAN_DIR="$HOME/.sdkman"
+# [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+
+# Support virtualenvwrapper.
+# Commented out, use pyenv instead.
+# export WORKON_HOME=~/.venvs
+# source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+
+# Setup pyenv.
+export PYENV_ROOT="$HOME/src/pyenv"
+pathadd "$PYENV_ROOT/bin"
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+    # The following line makes bash slow!
+    # See https://github.com/pyenv/pyenv/issues/784
+    # eval "$(pyenv virtualenv-init -)"
+fi
+
+# Setup ghcup-env.
+pathadd "$HOME/.cabal/bin"
+pathadd "$HOME/.ghcup/bin"
+
+#
+# Section: Set the bash prompt.
+#
+
+# A simple bash prompt, broken up into pieces.
 # The chroot thingy
 SIMPLE_PROMPT='${debian_chroot:+($debian_chroot)}'
 # Start with the green color
@@ -136,7 +185,7 @@ SIMPLE_PROMPT=$SIMPLE_PROMPT'$(__git_ps1) '
 # An actual $
 SIMPLE_PROMPT=$SIMPLE_PROMPT'\$ '
 
-# A bash prompt stolen from Luke Smith, broken up into pieces
+# A bash prompt stolen from Luke Smith, broken up into pieces.
 # The chroot thingy
 LUKE_SMITH_PROMPT='${debian_chroot:+($debian_chroot)}'
 # A red [
@@ -160,55 +209,52 @@ LUKE_SMITH_PROMPT=$LUKE_SMITH_PROMPT'$(__git_ps1) '
 # An actual $
 LUKE_SMITH_PROMPT=$LUKE_SMITH_PROMPT'\$ '
 
-# Set the bash prompt
+# Set the bash prompt.
 PS1=$LUKE_SMITH_PROMPT
 
-# Add xterm transparency
-[ -n "$XTERM_VERSION" ] && transset 0.8 --id "$WINDOWID" >/dev/null
+#
+# Section: Set up ssh agent.
+#
 
-# Make less display the search result in the center rather than on top
-# export LESS=-j.5
-
-# Commented out by vsoul in Wed Aug 12 13:28:10 EEST 2020
-# because virtualenvwrapper only works well with Python 2, not Python 3
-# When in Python 3, use pyenv
-# # Support virtualenvwrapper
-# export WORKON_HOME=~/.venvs
-# source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
-
-# A helpful shortcut for pretty rewriting a branch history since develop
-alias grid='git rebase -i develop'
-
-# Start the ssh agent, add all private keys
+# Start the ssh agent and add all (private) keys.
 if [ ! -S ~/.ssh/ssh_auth_sock ]; then
-	mkdir -p ~/.ssh
-	eval `ssh-agent`
-	ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
-	if [ -d ~/ssh_keys ];
-	then
-		# find ~/ssh_keys -type f -name id_rsa* | grep -v ".pub$" | xargs -I foo ssh-add foo
-		for priv_key in `find ~/ssh_keys -type f -name id_rsa* | grep -v ".pub$"`;
-		do
-			ssh-add $priv_key
-		done
-	fi
+    mkdir -p ~/.ssh
+    eval `ssh-agent`
+    ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+    if [ -d ~/ssh_keys ];
+    then
+        # find ~/ssh_keys -type f -name id_rsa* | grep -v ".pub$" | xargs -I foo ssh-add foo
+        for priv_key in `find ~/ssh_keys -type f -name id_rsa* | grep -v ".pub$"`;
+        do
+            ssh-add $priv_key
+        done
+    fi
 fi
 export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
 
-# Set up SDKMAN
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+#
+# Section: Set up useful stuff.
+#
 
-# Start screen by default
-if [ "$TERM" != "linux" -a -z "$STY" ]; then
-	exec screen -A
+# A helpful shortcut for pretty rewriting a branch history since develop.
+alias grid='git rebase -i develop'
+
+# Make less display the search result in the center rather than on top.
+# export LESS=-j.5
+
+# Add xterm transparency.
+if [ -n "$XTERM_VERSION" ]; then
+    transset 0.8 --id "$WINDOWID" >/dev/null
+fi
+# Add urxvt transparency.
+if [ -n "$COLORTERM" ]; then
+    transset 0.8 --id "$WINDOWID" >/dev/null
 fi
 
-export PYENV_ROOT="$HOME/src/pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-	eval "$(pyenv init -)"
-	# The following line makes bash slow!
-	# See https://github.com/pyenv/pyenv/issues/784
-	# eval "$(pyenv virtualenv-init -)"
+#
+# Start screen by default.
+#
+
+if [ "$TERM" != "linux" -a -z "$STY" ]; then
+    exec screen -A
 fi
