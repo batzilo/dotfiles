@@ -136,20 +136,39 @@ fi
 # export SDKMAN_DIR="$HOME/.sdkman"
 # [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 
-# Support virtualenvwrapper.
-# Commented out, use pyenv instead.
-# export WORKON_HOME=~/.venvs
-# source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+# Setup Python development.
+pydev() {
+	export PYENV_ROOT="$HOME/src/pyenv"
 
-# Setup pyenv.
-export PYENV_ROOT="$HOME/src/pyenv"
-pathadd "$PYENV_ROOT/bin"
-if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-    # The following line makes bash slow!
-    # See https://github.com/pyenv/pyenv/issues/784
-    # eval "$(pyenv virtualenv-init -)"
-fi
+	# Grab pyenv and pyenv-virtualenv code, if needed.
+	if [ ! -d $PYENV_ROOT ]; then
+		git clone git@github.com:pyenv/pyenv.git $PYENV_ROOT
+		pushd $PYENV_ROOT
+		src/configure
+		make -C src
+		popd
+		git clone git@github.com:pyenv/pyenv-virtualenv.git $PYENV_ROOT/plugins/pyenv-virtualenv
+	fi
+
+	pathadd "$PYENV_ROOT/bin"
+
+	if command -v pyenv 1>/dev/null 2>&1; then
+		eval "$(pyenv init --path)"
+		eval "$(pyenv init -)"
+
+		# The following line may make bash a bit slow to load.
+		# See https://github.com/pyenv/pyenv/issues/784.
+		eval "$(pyenv virtualenv-init -)"
+	fi
+
+	cat <<-EOH
+		pydev: You are all set!
+		pydev:
+		pydev: Use 'pyenv install X.Y.Z' to install a specific Python version.
+		pydev: Use 'pyenv virtualenv <version> <name>' to create a new virtual environment.
+		pydev: Use 'pyenv local <name>' inside your project to set the local virtual environment.
+	EOH
+}
 
 # Setup ghcup-env.
 pathadd "$HOME/.cabal/bin"
