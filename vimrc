@@ -173,6 +173,9 @@ autocmd FileType yaml setlocal indentkeys-=0#
 " " set foldnestmax=10
 set foldmethod=manual
 
+" Get nice SH files with tabs
+autocmd FileType sh setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab nospell
+
 " Get nice 2-space JS files
 autocmd FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab nospell
 
