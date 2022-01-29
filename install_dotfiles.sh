@@ -20,6 +20,7 @@ DOTFILES="     \
 	gitconfig  \
 	profile    \
 	screenrc   \
+	tmux.conf  \
 	vimrc      \
 	Xresources \
 	"

@@ -229,7 +229,7 @@ LUKE_SMITH_PROMPT=$LUKE_SMITH_PROMPT'$(__git_ps1) '
 LUKE_SMITH_PROMPT=$LUKE_SMITH_PROMPT'\$ '
 
 # Set the bash prompt.
-PS1=$LUKE_SMITH_PROMPT
+PS1=$SIMPLE_PROMPT
 
 #
 # Section: Set up ssh agent.
@@ -271,9 +271,16 @@ if [ -n "$COLORTERM" ]; then
 fi
 
 #
-# Start screen by default.
+# Make bash start tmux by default when in SSH or GUI terminals.
 #
-
-if [ "$TERM" != "linux" -a -z "$STY" ]; then
-	exec screen -A
+# If $TERM is not "linux" (we are not running bash in a local TTY)
+#   and
+# if $STY is not set (we are not running bash inside screen)
+#   and
+# if $TMUX is not set (we are not running bash inside tmux)
+#   then
+# start a new tmux session.
+#
+if [ "$TERM" != "linux" -a -z "$STY" -a -z "$TMUX" ]; then
+	tmux new
 fi
