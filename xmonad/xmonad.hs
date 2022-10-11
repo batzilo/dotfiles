@@ -356,7 +356,7 @@ myKeys = myKeyBindings ++
 
 main = do
   xmproc <- spawnPipe "xmobar ~/.xmonad/xmobarrc"
-  xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig {
+  xmonad $ withUrgencyHook NoUrgencyHook . docks $ def {
     focusedBorderColor = myFocusedBorderColor
   , normalBorderColor = myNormalBorderColor
   , terminal = myTerminal
@@ -364,14 +364,12 @@ main = do
   , layoutHook = myLayouts
   , workspaces = myWorkspaces
   , modMask = myModMask
-  , handleEventHook = fullscreenEventHook
   , startupHook = do
       setWMName "LG3D"
       windows $ W.greedyView startupWorkspace
       spawn "~/.xmonad/startup-hook"
-  , manageHook = manageHook defaultConfig
+  , manageHook = manageDocks <+> manageHook def
       <+> composeAll myManagementHooks
-      <+> manageDocks
   , logHook = dynamicLogWithPP $ xmobarPP {
 --  , logHook = takeTopFocus <+> dynamicLogWithPP xmobarPP {
       ppOutput = hPutStrLn xmproc
