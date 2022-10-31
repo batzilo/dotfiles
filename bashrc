@@ -152,6 +152,9 @@ pydev() {
 
 	pathadd "$PYENV_ROOT/bin"
 
+	# Needed for pipx. Needs to be before the $(pyenv init -) command.
+	pathadd "$HOME/.local/bin"
+
 	if command -v pyenv 1>/dev/null 2>&1; then
 		eval "$(pyenv init --path)"
 		eval "$(pyenv init -)"
@@ -160,9 +163,6 @@ pydev() {
 		# See https://github.com/pyenv/pyenv/issues/784.
 		eval "$(pyenv virtualenv-init -)"
 	fi
-
-	# Needed for pipx.
-	pathadd "$HOME/.local/bin"
 
 	# Needed for pipx autocomplete.
 	eval "$(register-python-argcomplete pipx)"
