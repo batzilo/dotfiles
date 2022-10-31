@@ -161,6 +161,12 @@ pydev() {
 		eval "$(pyenv virtualenv-init -)"
 	fi
 
+	# Needed for pipx.
+	pathadd "$HOME/.local/bin"
+
+	# Needed for pipx autocomplete.
+	eval "$(register-python-argcomplete pipx)"
+
 	cat <<-EOH
 		pydev: You are all set!
 		pydev:
