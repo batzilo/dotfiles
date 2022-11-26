@@ -1,19 +1,48 @@
 #!/bin/bash
 #
-# Adjust the screen brightness for intel i915
+# Adjust the screen brightness for intel i915.
 #
-# Make sure:
-# * the current user is a member of "video" group
-# * /sys/class/backlight/ is a symlink to the actual device sysfs directory
-# * /sys/class/backlight/<vendor>/brightness file is in group "video"
-#   # chgrp -R video /sys/class/backlight/<vendor>/
-# * /sys/class/backlight/<vendor>/brightness file is writable by group
-#   # chmod 664 /sys/class/backlight/<vendor>/brightness
-# * /sys/class/backlight/<vendor>/max_brightness file is writable by group
-#   # chmod 664 /sys/class/backlight/<vendor>/max_brightness
+# Requirements:
 #
-# If the colors seem off, try:
+# * NOTE: The following changes are done to sysfs, which means that they will
+#         be undone by the next reboot. Consider using a udev rule to make
+#         these changes persistent across reboots.
+#
+# * The user is a member of the "video" group.
+#
+#   ```
+#   # groups $username
+#   # adduser $username video
+#   ```
+#
+# * The /sys/class/backlight/ directory contains a symlink to the actual device
+#   sysfs directory.
+#
+#   ```
+#   # ls -al /sys/class/backlight/
+#   ```
+#
+# * The /sys/class/backlight/<vendor>/brightness and max_brightness files are
+#   owned by the "video" group.
+#
+#   ```
+#   # chgrp video /sys/class/backlight/<vendor>/brightness
+#   # chgrp video /sys/class/backlight/<vendor>/max_brightness
+#   ```
+#
+# * The /sys/class/backlight/<vendor>/brightness and max_brightness files are
+#   writable by the "video" group.
+#
+#   ```
+#   # chmod g+w /sys/class/backlight/<vendor>/brightness
+#   # chmod g+w /sys/class/backlight/<vendor>/max_brightness
+#   ```
+#
+# If the colors seem off, you can try:
+#
+# ```
 # # xrandr --display X --gamma 1:1:1
+# ```
 #
 
 # fail early and loudly
@@ -23,7 +52,7 @@ set -e
 VENDOR="intel_backlight"
 
 # The sysfs base directory
-BASE="/sys/class/backlight/$VENDOR/"
+BASE="/sys/class/backlight/$VENDOR"
 
 # The brightness file
 BR_FILE="$BASE/brightness"
@@ -37,8 +66,11 @@ MAX_BR_FILE="$BASE/max_brightness"
 # Get the maximum brightness
 MAX_BR=$(cat $MAX_BR_FILE)
 
-# Get the step value
-STEP=$(( 15 * MAX_BR / 100 ))
+# The number of steps
+NR_STEPS=9
+
+# The step value
+STEP=$(( MAX_BR / NR_STEPS ))
 
 
 while :
@@ -65,6 +97,7 @@ do
 			break
 			;;
 		*)
+			echo $CURR_BR
 			;;
 	esac
 	shift || break
