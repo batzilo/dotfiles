@@ -1,0 +1,42 @@
+#!/bin/bash
+#
+# Use redshift to turn on warm mode on your screen.
+#
+
+# fail early and loudly
+set -e
+
+TOOL="redshift -m randr"
+
+# The while loop and the shifting aren't really needed ...
+while :
+do
+	case "$1" in
+		"-h" | "--help")
+			echo "Usage: warm.sh [on|off|<value>]"
+			echo
+			echo "<value> should be 1000 - 25000"
+			echo "default: 6500"
+			echo "night: 3500"
+			echo "day 5700"
+			echo "min 1000"
+			echo "max 25000"
+			break
+			;;
+		"" | "on")
+			$TOOL -x
+			$TOOL -O 3500
+			break
+			;;
+		"off")
+			$TOOL -x
+			break
+			;;
+		*)
+			$TOOL -x
+			$TOOL -O $1
+			break
+			;;
+	esac
+	shift || break
+done
