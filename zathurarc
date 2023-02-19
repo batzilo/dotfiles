@@ -1,0 +1,4 @@
+# ~/.config/zathura/zathurarc
+
+# In normal mode, press G to go to the bottom of the document.
+map [normal] G scroll bottom
