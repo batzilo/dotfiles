@@ -3,16 +3,20 @@
 vim/.netrwhist
 vim/spell/en.utf-8.add
 vim/spell/en.utf-8.add.spl
+
+local.gitconfig
+arrikto.gitconfig
+blueground.gitconfig
+
+# Ignore xmonad binary files.
+xmonad/build-x86_64-linux/*
+xmonad/xinit.log
+xmonad/xinitrc_xmonad.log
+xmonad/xmonad
 xmonad/xmonad-x86_64-linux
 xmonad/xmonad.errors
 xmonad/xmonad.hi
 xmonad/xmonad.o
-xmonad/xinitrc_xmonad.log
-xmonad/xinit.log
-xmonad/xmonad
-local.gitconfig
-arrikto.gitconfig
-blueground.gitconfig
 
 # Ignore the binary version of vim spellbooks
 vim/spell/*.spl
