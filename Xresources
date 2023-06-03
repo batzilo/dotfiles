@@ -123,7 +123,7 @@ URxvt.font: xft:Consolas:antialias=true:size=18:minspace=False
 URxvt*saveLines: 4096
 
 ! Use DOS-box-like colors
-URxvt*foreground: rgb:a8/a8/a8
+URxvt*foreground: rgb:c7/c7/c7
 URxvt*background: rgb:00/00/00
 URxvt*color0: rgb:00/00/00
 URxvt*color1: rgb:a8/00/00
