@@ -1,0 +1,90 @@
+#!/bin/bash
+#
+# Set the theme.
+#
+# The changes take effect on the next
+# terminal emulator that you run under X.
+#
+
+# fail early and loudly
+set -e
+
+# Persist the current selected theme on disk so that
+# all new terminal emulators and shells can read it.
+THEME_FILE=~/.theme
+
+while :
+do
+	case "$1" in
+		"-h" | "--help")
+			# Print the help message.
+			echo "Usage: theme [default|slight|sdark]"
+			echo
+			echo "If no theme is specified as an argument,"
+			echo "apply the ~/.theme if file exists,"
+			echo "otherwise apply the default theme."
+			break
+			;;
+		"default" | "slight" | "sdark")
+			# Change the theme to the selected theme.
+			echo $1 > $THEME_FILE
+			break
+			;;
+		*)
+			# Change the theme to default.
+			echo "default"> $THEME_FILE
+			break
+			;;
+	esac
+	shift || break
+done
+
+function apply_theme_default {
+	# Set the terminal colors.
+	xrdb $HOME/src/dotfiles/Xresources.urxvt
+
+	# Set the vim colors
+	sed -i 's/^set background=.*/set background=dark/' $HOME/src/dotfiles/vimrc
+	sed -i 's/^colorscheme.*/colorscheme mustang/' $HOME/src/dotfiles/vimrc
+}
+
+function apply_theme_solarized_light {
+	# Set the terminal colors.
+	xrdb $HOME/src/dotfiles/Xresources.urxvt
+	xrdb -DSOLARIZED_LIGHT -merge $HOME/src/dotfiles/Xresources.urxvt.solarized
+
+	# Set the vim colors
+	sed -i 's/^set background=.*/set background=light/' $HOME/src/dotfiles/vimrc
+	sed -i 's/^colorscheme.*/colorscheme solarized/' $HOME/src/dotfiles/vimrc
+}
+
+function apply_theme_solarized_dark {
+	# Set the terminal colors.
+	xrdb $HOME/src/dotfiles/Xresources.urxvt
+	xrdb -DSOLARIZED_DARK -merge $HOME/src/dotfiles/Xresources.urxvt.solarized
+
+	# Set the vim colors
+	sed -i 's/^set background=.*/set background=dark/' $HOME/src/dotfiles/vimrc
+	sed -i 's/^colorscheme.*/colorscheme solarized/' $HOME/src/dotfiles/vimrc
+
+	# Does not work :(
+	# sed -i 's/"userTheme":"light"/"userTheme":"dark"/' $HOME/.config/Slack/storage/slack-settings
+}
+
+theme="default"
+[ -r $THEME_FILE ] && theme=$(< $THEME_FILE )
+
+case $theme in
+	default)
+		apply_theme_default
+		;;
+	slight)
+		apply_theme_solarized_light
+		;;
+	sdark)
+		apply_theme_solarized_dark
+		;;
+	*)
+		apply_theme_default
+		;;
+esac

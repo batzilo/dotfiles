@@ -72,26 +72,26 @@ xscreensaver -no-splash &
 # 	fi
 # fi
 
-# kurt @ Arr HQ
-# If both HDMI and mDP are connected, use them
-if [ $(hostname) == "kurt" ]; then
-	HDMI1=`xrandr | grep 'HDMI1 connected' | wc -l`
-	HDMI2=`xrandr | grep 'HDMI2 connected' | wc -l`
-	if [ $HDMI1 -ne 0 -a $HDMI2 -ne 0 ]; then
-		xrandr --output eDP1 --primary --mode 1920x1080 --pos 0x0 --rotate normal
-		xrandr --output HDMI1 --mode 1920x1080 --pos 1920x0 --rotate normal
-		xrandr --output HDMI2 --mode 1920x1080 --pos 3840x0 --rotate normal
-		xrandr --output DP1 --off
-		xrandr --output VIRTUAL1 --off
-	fi
-fi
+# # kurt @ Arr HQ
+# # If both HDMI and mDP are connected, use them
+# if [ $(hostname) == "kurt" ]; then
+# 	HDMI1=`xrandr | grep 'HDMI1 connected' | wc -l`
+# 	HDMI2=`xrandr | grep 'HDMI2 connected' | wc -l`
+# 	if [ $HDMI1 -ne 0 -a $HDMI2 -ne 0 ]; then
+# 		xrandr --output eDP1 --primary --mode 1920x1080 --pos 0x0 --rotate normal
+# 		xrandr --output HDMI1 --mode 1920x1080 --pos 1920x0 --rotate normal
+# 		xrandr --output HDMI2 --mode 1920x1080 --pos 3840x0 --rotate normal
+# 		xrandr --output DP1 --off
+# 		xrandr --output VIRTUAL1 --off
+# 	fi
+# fi
 
 
 #
 # LOAD SCREEN BACKGROUNDS
 #
 
-wp &
+# wp &
 
 
 #
@@ -139,10 +139,25 @@ wp &
 pkill ssh-agent
 eval `ssh-agent -s`
 ssh-add ~/.ssh/id_rsa
-ssh-add ~/.ssh/id_rsa_arr
+# ssh-add ~/.ssh/id_rsa_arr
 
-# Use a theme
-~/.bin/theme_light.sh
+# Apply Kurt settings.
+if [ $(hostname) == "kurt" ]; then
+	# Set the theme.
+	change_theme default
+
+	# Configure the screen resolution.
+	xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal
+
+	# Set the background image.
+	feh --no-fehbg --bg-fill ~/safe/wallpapers/debian.jpg
+
+	# Fix two-finger touchpad scrolling.
+	xinput --set-prop 14 "libinput Scrolling Pixel Distance" 50
+
+	# Fix autorepeat speed.
+	xset r rate 300 30
+fi
 
 # Now, finally, start xmonad
 exec xmonad
