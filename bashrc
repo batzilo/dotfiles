@@ -201,7 +201,7 @@ if [ ! -S ~/.ssh/ssh_auth_sock ]; then
 	if [ -d ~/ssh_keys ];
 	then
 		# find ~/ssh_keys -type f -name id_rsa* | grep -v ".pub$" | xargs -I foo ssh-add foo
-		for priv_key in `find ~/ssh_keys -type f -name id_rsa* | grep -v ".pub$"`;
+		for priv_key in `find ~/ssh_keys -type f -name id_rsa* | grep -v ".pub$" | grep -v "ppk"`;
 		do
 			ssh-add $priv_key
 		done
