@@ -184,3 +184,15 @@ autocmd FileType java setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab no
 
 " Get nice 2-space Groovy files
 autocmd FileType groovy setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab nospell
+
+" Get nice 2-space c files
+autocmd FileType c setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab nospell
+
+" Get nice 2-space cpp files
+autocmd FileType cpp setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab nospell
+
+" Get nice 4-space CMake files
+autocmd FileType cmake setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab nospell
+
+" Get nice 4-space XML files
+autocmd FileType xml setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab nospell
