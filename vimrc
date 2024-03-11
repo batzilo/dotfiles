@@ -108,14 +108,89 @@ set spelllang=en_us,el
 set spellfile=~/.vim/spell/en.utf-8.add
 set spell
 
-" Enable the "ctrlp.vim" plugin
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+" Set the Normal group background terminal color to none
+" so that vim has the same transparency as xterm
+highlight Normal ctermbg=none
 
-" Do not auto indent the line when a colon is inserted
-" http://stackoverflow.com/questions/19320747/prevent-vim-from-indenting-line-when-typing-a-colon-in-python
-autocmd FileType python setlocal indentkeys-=<:>
-autocmd FileType python setlocal indentkeys-=:
+" Set the color scheme
+set background=dark
+let g:solarized_termcolors=256
+" colorscheme solarized
+" colorscheme xoria256
+" colorscheme monokai
+" colorscheme mustang
+colorscheme mustang
+
+" Do not maintain a history file of all the directories that were modified
+let g:netrw_dirhistmax = 0
+
+" " Setting for folding
+" "
+" " Fold based on indent
+" set foldmethod=indent
+" " Do not fold by default
+" set nofoldenable
+" " The number of | or numbers displayed
+" set foldcolumn=1
+" " The deepest fold is 10 levels
+" " set foldnestmax=10
+set foldmethod=manual
+
+" vim-plug automatic installation
+" https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
+" after adding this lines, restart vim (maybe twice)
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Use vim-plug
+call plug#begin()
+" The default plugin directory will be as follows:
+"   - Vim (Linux/macOS): '~/.vim/plugged'
+"   - Vim (Windows): '~/vimfiles/plugged'
+"   - Neovim (Linux/macOS/Windows): stdpath('data') . '/plugged'
+" You can specify a custom plugin directory by passing it as the argument
+"   - e.g. `call plug#begin('~/.vim/plugged')`
+"   - Avoid using standard Vim directory names like 'plugin'
+" Make sure you use single quotes
+
+" See https://github.com/junegunn/vim-plug/blob/master/README.md
+
+" Install ctrlp
+Plug 'https://github.com/ctrlpvim/ctrlp.vim'
+
+" On-demand loading
+Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+
+" Install syntastic
+" FIXME: Switch to ALE: https://github.com/dense-analysis/ale
+Plug 'https://github.com/vim-syntastic/syntastic'
+
+" Install vim-flake8
+Plug 'https://github.com/nvie/vim-flake8'
+
+" Initialize plugin system
+" - Automatically executes `filetype plugin indent on` and `syntax enable`.
+call plug#end()
+" You can revert the settings after the call like so:
+"   filetype indent off   " Disable file-type-specific indentation
+"   syntax off            " Disable syntax highlighting
+
+" Restart Vim, and run the :PlugInstall statement to install your plugins.
+
+" Start NERDTree when Vim is started without file arguments or when Vim starts with a directory argument.
+autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
+  \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | wincmd p | endif
+
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+" Configure ctrlp
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " Syntastic recommended settings
 set statusline+=%#warningmsg#
@@ -133,42 +208,18 @@ autocmd BufWritePost *.py call Flake8()
 let g:flake8_show_in_gutter = 1
 let g:syntastic_python_checkers = ['flake8']
 
+" Do not auto indent the line when a colon is inserted
+" http://stackoverflow.com/questions/19320747/prevent-vim-from-indenting-line-when-typing-a-colon-in-python
+autocmd FileType python setlocal indentkeys-=<:>
+autocmd FileType python setlocal indentkeys-=:
+
 " Settings for html files
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab shiftwidth=2 softtabstop=2 textwidth=0 colorcolumn=0
-
-" Set the Normal group background terminal color to none
-" so that vim has the same transparency as xterm
-highlight Normal ctermbg=none
-
-" Set the color scheme
-set background=dark
-let g:solarized_termcolors=256
-" colorscheme solarized
-" colorscheme xoria256
-" colorscheme monokai
-" colorscheme mustang
-colorscheme mustang
-
-" Do not maintain a history file of all the directories that were modified
-let g:netrw_dirhistmax = 0
 
 " Get nice 2-space YAML files
 autocmd FileType yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab nospell
 " Do not auto indent the line when a # is inserted
 autocmd FileType yaml setlocal indentkeys-=0#
-
-
-" " Setting for folding
-" "
-" " Fold based on indent
-" set foldmethod=indent
-" " Do not fold by default
-" set nofoldenable
-" " The number of | or numbers displayed
-" set foldcolumn=1
-" " The deepest fold is 10 levels
-" " set foldnestmax=10
-set foldmethod=manual
 
 " Get nice SH files with tabs
 autocmd FileType sh setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab nospell

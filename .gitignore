@@ -23,3 +23,7 @@ vim/spell/*.spl
 
 # Ignore the downloaded dropbox Python script.
 bin/dropbox
+
+# Ignore the vim plugins
+vim/autoload
+vim/plugged
