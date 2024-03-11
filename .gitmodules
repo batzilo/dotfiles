@@ -10,12 +10,3 @@
 # To add a new submodule, use:
 # $ git submodule add git@github.com:foo/bar.git path/to/foo/bar
 #
-[submodule "syntastic"]
-	path = vim/bundle/syntastic
-	url = https://github.com/scrooloose/syntastic.git
-[submodule "ctrlp"]
-	path = vim/bundle/ctrlp.vim
-	url = https://github.com/ctrlpvim/ctrlp.vim
-[submodule "Jenkinsfile-vim-syntax"]
-	path = vim/bundle/Jenkinsfile-vim-syntax
-	url = https://github.com/martinda/Jenkinsfile-vim-syntax.git
