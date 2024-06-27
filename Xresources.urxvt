@@ -34,3 +34,12 @@ URxvt.scrollBar_right: false
 
 ! Add True Transparency to URxvt
 URxvt*depth: 32
+
+! Use Ctrl-Shift-C for copy  to   the CLIPBOARD buffer.
+! Use Ctrl-Shift-V for paste from the CLIPBOARD buffer.
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+
+URxvt.clipboard.autocopy: true
