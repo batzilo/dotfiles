@@ -244,3 +244,7 @@ autocmd FileType cmake setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab n
 
 " Get nice 4-space XML files
 autocmd FileType xml setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab nospell
+
+" Get nice 4-space ASTRA files
+autocmd BufNewFile,BufRead *.astra set filetype=astra
+autocmd FileType astra setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab nospell
