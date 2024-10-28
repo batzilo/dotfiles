@@ -3,7 +3,7 @@
 !URxvt*termName: rxvt-unicode-256color
 
 ! Use a nice truetype font and size
-URxvt.font: xft:Consolas:antialias=true:size=18:minspace=False
+URxvt.font: xft:Consolas:antialias=true:size=16:minspace=False
 
 ! Add a lot of scroll back
 URxvt*saveLines: 4096
