@@ -43,3 +43,6 @@ URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 
 URxvt.clipboard.autocopy: true
+
+! I don't understand, see https://superuser.com/a/512731
+URxvt.intensityStyles: false
