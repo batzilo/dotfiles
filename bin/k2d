@@ -1,0 +1,27 @@
+#!/bin/sh
+
+BLT_DISPLAY_RESOLUTION=1920x1080
+EXT_DISPLAY_RESOLUTION=2560x1440
+
+xrandr --output eDP-1 --primary --mode $BLT_DISPLAY_RESOLUTION --pos 0x0 --rotate normal \
+	   --output DP-1            --mode $EXT_DISPLAY_RESOLUTION --pos 0x0 --rotate normal \
+	   --output HDMI-1 --off \
+	   --output HDMI-2 --off
+
+sleep 3
+
+xrandr --output eDP-1           --mode $BLT_DISPLAY_RESOLUTION --pos 0x0 --rotate normal \
+	   --output DP-1  --primary --mode $EXT_DISPLAY_RESOLUTION --pos 0x0 --rotate normal \
+	   --output HDMI-1 --off \
+	   --output HDMI-2 --off
+
+sleep 1
+
+xrandr --output eDP-1 --off \
+	   --output DP-1  --primary --mode $EXT_DISPLAY_RESOLUTION --pos 0x0 --rotate normal \
+	   --output HDMI-1 --off \
+	   --output HDMI-2 --off
+
+sleep 1
+
+wp
