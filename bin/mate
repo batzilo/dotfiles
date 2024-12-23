@@ -1,0 +1,3 @@
+#!/bin/bash
+
+DISPLAY=:0 XINITRC=~/.mate-xinitrc xinit -- :0 vt1 -nolisten tcp &> ~/.mate-xinit.log

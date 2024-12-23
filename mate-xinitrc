@@ -1,0 +1,2 @@
+xmonad --replace &
+exec mate-session
