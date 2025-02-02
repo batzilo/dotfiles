@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# Run KeePassXC.
+#
+
+# fail early and loudly
+set -e
+
+QT_SCALE_FACTOR=1.5 keepassxc
