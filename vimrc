@@ -64,6 +64,33 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 " let g:flake8_show_in_gutter = 1
 " let g:syntastic_python_checkers = ['flake8']
 
+" ale
+"
+" Documentation: https://github.com/dense-analysis/ale/blob/master/doc/ale.txt
+" enable ale
+let g:ale_enabled = 1
+" always show warning/error messages for all lines
+let g:ale_virtualtext_cursor = 2
+" always display the sign column, even if no warnings/errors
+let g:ale_sign_column_always = 1
+" echo the warning/error message under cursor
+let g:ale_echo_cursor = 1
+" the linters need to be installed on the system
+let g:ale_linters = {
+\   'c': ['gcc', 'clang', 'clangtidy'],
+\}
+let g:ale_fixers = {
+\   'c': ['clang-format'],
+\}
+" let clang-tidy auto detect the .clang-tidy file
+let g:ale_c_clangtidy_options = ''
+" make ale read the compile_commands.json file in the build directory
+let g:ale_c_parse_compile_commands = 1
+let g:ale_c_compile_commands_directory = 'build'
+" automatically fix files on save
+let g:ale_fix_on_save = 1
+
+
 
 
 " Disable compatibility with vi, use vim enhancements
