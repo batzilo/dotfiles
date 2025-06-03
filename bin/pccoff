@@ -1,0 +1,4 @@
+#!/bin/bash
+
+source pcc_common.sh
+pcc_kill

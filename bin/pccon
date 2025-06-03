@@ -1,0 +1,4 @@
+#!/bin/bash
+
+source pcc_common.sh
+pcc_is_running || pcc_start
