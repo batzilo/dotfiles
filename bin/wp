@@ -6,16 +6,53 @@ import os
 import glob
 import random
 import subprocess
+import argparse
 
 WALLPAPERS_DIR = "safe/wallpapers"
+DEFAULT_WALLPAPER = "si.jpg"
 
-command = "xrandr --query | grep connected | grep -v dis | wc -l"
-res = subprocess.check_output(command, shell=True)
-num_screens = int(res)
 
-os.chdir(os.path.expanduser("~"))
-files = glob.glob("/".join([WALLPAPERS_DIR, "*"]))
-random.shuffle(files)
+def get_num_screens():
+    command = "xrandr --query | grep connected | grep -v dis | wc -l"
+    res = subprocess.check_output(command, shell=True)
+    return int(res)
 
-command = "feh --no-fehbg --bg-fill " + " ".join(files[0:num_screens])
-os.system(command)
+
+def get_wallpaper_files():
+    os.chdir(os.path.expanduser("~"))
+    return glob.glob(os.path.join(WALLPAPERS_DIR, "*"))
+
+
+def set_wallpapers(image_paths):
+    command = ["feh", "--no-fehbg", "--bg-fill"] + image_paths
+    subprocess.run(command)
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Set wallpaper using feh.")
+    parser.add_argument(
+        "--default",
+        "-d",
+        action="store_true",
+        help="Use the default wallpaper on all screens.",
+    )
+    args = parser.parse_args()
+
+    num_screens = get_num_screens()
+
+    if args.default:
+        image_path = os.path.join(
+            os.path.expanduser("~"), WALLPAPERS_DIR, DEFAULT_WALLPAPER
+        )
+        set_wallpapers([image_path] * num_screens)
+    else:
+        files = get_wallpaper_files()
+        if not files:
+            print("No wallpaper files found.")
+            return
+        random.shuffle(files)
+        set_wallpapers(files[:num_screens])
+
+
+if __name__ == "__main__":
+    main()
