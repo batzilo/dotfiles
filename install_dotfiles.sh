@@ -18,6 +18,7 @@ set -e
 DOTFILES="     \
 	bashrc     \
 	gitconfig  \
+	picom.conf \
 	profile    \
 	screenrc   \
 	tmux.conf  \
