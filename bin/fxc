@@ -4,7 +4,7 @@
 
 set -eu
 
-# FIX_X_CURSOR="$HOME/src/dotfiles/Xresources.cursor"
-# xrdb -merge "${FIX_X_CURSOR}"
+FIX_X_CURSOR="$HOME/src/dotfiles/Xresources.cursor"
+xrdb -merge "${FIX_X_CURSOR}"
 
 xsetroot -cursor_name left_ptr
