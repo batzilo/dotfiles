@@ -1,3 +1,7 @@
+! Assuming you will later feed this file to `xrdb`, please note that `xrdb`
+! does not allow unmatched single or double quotes on a commented line.
+! https://unix.stackexchange.com/questions/373187/
+ 
 ! Set the TERM environment variable
 xterm*termName: xterm-256color
 

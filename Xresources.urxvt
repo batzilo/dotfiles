@@ -1,3 +1,7 @@
+! Assuming you will later feed this file to `xrdb`, please note that `xrdb`
+! does not allow unmatched single or double quotes on a commented line.
+! https://unix.stackexchange.com/questions/373187/
+ 
 ! Set the TERM environment variable
 !URxvt*termName: xterm-256color
 !URxvt*termName: rxvt-unicode-256color
@@ -44,5 +48,5 @@ URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 
 URxvt.clipboard.autocopy: true
 
-! I don't understand, see https://superuser.com/a/512731
+! I don''t understand, see https://superuser.com/a/512731
 URxvt.intensityStyles: false
