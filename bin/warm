@@ -25,7 +25,7 @@ do
 			;;
 		"" | "on")
 			$TOOL -x
-			$TOOL -O 3500
+			$TOOL -O 5000
 			break
 			;;
 		"off")
