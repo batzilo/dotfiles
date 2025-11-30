@@ -1,4 +1,22 @@
-# ~/.config/zathura/zathurarc
+# Note: zathura by default doesn't use: ~/.zathurarc,
+# instead it reads the file: ~/.config/zathura/zathurarc.
 
 # In normal mode, press G to go to the bottom of the document.
 map [normal] G scroll bottom
+
+
+# Colors
+# zathura supports HTML color codes and CSS3-style rgb(r,g,b) and rgba(r,g,b,a) values
+# Reminder: use Ctrl-r to inverse colors.
+
+set recolor
+
+# set recolor-lightcolor \#222222 # some light black
+set recolor-lightcolor \#002b36 # solarized dark background
+# set recolor-lightcolor \#fdf6e3 # solarized light background, needs black text
+
+set recolor-keephue
+
+# The background color
+# set default-bg \#222230  # some dark background
+set default-bg \#6db46  # transparent background
