@@ -1,0 +1,7 @@
+#!/bin/bash
+#
+# Run Zathura by overriding the path to the configuration file.
+# The confirugation file is: $HOME/zathurarc (note, there's no dot)
+#
+
+/usr/bin/zathura -c "$HOME" $@
