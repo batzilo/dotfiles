@@ -19,13 +19,13 @@ eval `dbus-launch --auto-syntax`
 # export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 
 # Load X resources
-xrdb -merge ~/.Xresources
+# Note: commented out since I don't have any Xresources to load.
+# xrdb -merge ~/.Xresources
 
 # Start compositing to support transparency.
-# You may omit this if you prefer not to use any transparency,
-# but it is likely to cause ugly black fringing with some programs
-# such as synapse that expect transparency support.
-xcompmgr -n -d $DISPLAY &
+# You may omit this if you prefer not to use any transparency.
+# xcompmgr -n -d $DISPLAY &
+DISPLAY=":0" picom --config ~/.picom.conf -b
 
 # Start the xscreensaver daemon
 xscreensaver -no-splash &
@@ -147,10 +147,10 @@ if [ $(hostname) == "kurt" ]; then
 	# change_theme default
 
 	# Configure the screen resolution.
-	xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal
+	monitor_single_builtin
 
 	# Set the background image.
-	feh --no-fehbg --bg-fill ~/safe/wallpapers/debian.jpg
+	wpd
 
 	# Fix two-finger touchpad scrolling.
 	xinput --set-prop 14 "libinput Scrolling Pixel Distance" 50
