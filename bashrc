@@ -135,11 +135,6 @@ if [ -d "$HOME/.bin" ]; then
 	pathadd "$HOME/.bin"
 fi
 
-# Set up SDKMAN.
-# Commented out, I don't use SDKMAN anymore.
-# export SDKMAN_DIR="$HOME/.sdkman"
-# [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
-
 # Setup Python development.
 pydev() {
 	export PYENV_ROOT="$HOME/src/pyenv"
@@ -242,3 +237,8 @@ fi
 if [ "$TERM" != "linux" -a -z "$STY" -a -z "$TMUX" ]; then
 	tmux new
 fi
+
+# Set up SDKMAN.
+export SDKMAN_DIR="$HOME/.sdkman"
+export SDKMAN_INIT_SH="$SDKMAN_DIR/bin/sdkman-init.sh"
+[[ -s "$SDKMAN_INIT_SH" ]] && source "$SDKMAN_INIT_SH"
