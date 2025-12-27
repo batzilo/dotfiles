@@ -2,6 +2,7 @@
 # instead it reads the file: ~/.config/zathura/zathurarc.
 
 # In normal mode, press G to go to the bottom of the document.
+# Unfortunately, this disables the ability to use `5G` to go to the 5-th page.
 map [normal] G scroll bottom
 
 

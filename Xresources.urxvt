@@ -1,6 +1,8 @@
-! Assuming you will later feed this file to `xrdb`, please note that `xrdb`
-! does not allow unmatched single or double quotes on a commented line.
-! https://unix.stackexchange.com/questions/373187/
+! Configure urxvt.
+! Every option in this file should start with `URxvt`.
+! Load it with `xrdb -merge /path/to/this/file`.
+! Please note that `xrdb` does not allow unmatched single or double quotes
+! on a commented line: https://unix.stackexchange.com/questions/373187/.
  
 ! Set the TERM environment variable
 !URxvt*termName: xterm-256color
@@ -11,6 +13,10 @@ URxvt.font: xft:Consolas:antialias=true:size=16:minspace=False
 
 ! Add a lot of scroll back
 URxvt*saveLines: 4096
+
+! Do not show a scroll bar
+URxvt.scrollBar: false
+URxvt.scrollBar_right: false
 
 ! Use DOS-box-like colors
 URxvt*foreground: rgb:c7/c7/c7
@@ -31,10 +37,6 @@ URxvt*color12: rgb:54/54/fc
 URxvt*color13: rgb:fc/54/fc
 URxvt*color14: rgb:54/fc/fc
 URxvt*color15: rgb:fc/fc/fc
-
-! Do not show a scroll bar
-URxvt.scrollBar: false
-URxvt.scrollBar_right: false
 
 ! Add True Transparency to URxvt
 URxvt*depth: 32

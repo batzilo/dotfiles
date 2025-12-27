@@ -1,25 +1,28 @@
+#!/usr/bin/env bash
 #
 # Set the bash prompt, based on the current theme.
 #
 
-THEME_FILE=~/.theme
-
 function apply_theme_default {
-	source luke_smith_prompt.sh
+	source bash_prompt_luke_smith.sh
 }
 
 function apply_theme_solarized_light {
-	source simple_prompt.sh
+	source bash_prompt_simple.sh
 }
 
 function apply_theme_solarized_dark {
-	source simple_prompt.sh
+	source bash_prompt_simple.sh
 }
 
-theme="default"
-[ -r $THEME_FILE ] && theme=$(< $THEME_FILE )
+# Persist the current selected theme on disk so that
+# all new terminal emulators and shells can read it.
+THEME_FILE="$HOME/.theme"
 
-case $theme in
+theme="default"
+[ -r "$THEME_FILE" ] && theme=$(< "$THEME_FILE")
+
+case "$theme" in
 	default)
 		apply_theme_default
 		;;

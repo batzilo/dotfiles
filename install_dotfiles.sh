@@ -23,6 +23,11 @@ DOTFILES="     \
 	screenrc   \
 	tmux.conf  \
 	vimrc      \
+	zathurarc  \
+	"
+
+# Moved from above to here for future reference.
+UNUSED_DOTFILES="
 	Xresources \
 	"
 
@@ -93,7 +98,7 @@ create_symblic_link () {
 		fi
 	fi
 	echo "Creating a symbolic link for $DST_DOTFILE"
-	ln -s $ASK_FOR_APPROVAL $USE_FORCE $SRC_DOTFILE $DST_DOTFILE
+	ln -s $ASK_FOR_APPROVAL $USE_FORCE $SRC_DOTFILE $DST_DOTFILE || echo "Skipping $DST_DOTFILE"
 	chown -h $TARGET_USER:$TARGET_USER $DST_DOTFILE
 }
 
@@ -119,7 +124,7 @@ for dir in $DOTDIRS; do
 		continue
 	fi
 	echo "Creating a symbolic link for $DST_DOTDIR"
-	ln -s -T $ASK_FOR_APPROVAL $USE_FORCE $SRC_DIR/$dir $DST_DOTDIR
+	ln -s -T $ASK_FOR_APPROVAL $USE_FORCE $SRC_DIR/$dir $DST_DOTDIR || echo "Skipping $DST_DOTDIR"
 	chown -R $TARGET_USER:$TARGET_USER $DST_DOTDIR
 done
 unset dir

@@ -187,7 +187,7 @@ pathadd "$HOME/.ghcup/bin"
 # Section: Set the bash prompt (may depend on the theme).
 #
 
-source apply_bash_prompt.sh
+source bash_prompt_apply.sh
 
 #
 # Section: Set up ssh agent.

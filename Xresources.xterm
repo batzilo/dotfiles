@@ -1,6 +1,8 @@
-! Assuming you will later feed this file to `xrdb`, please note that `xrdb`
-! does not allow unmatched single or double quotes on a commented line.
-! https://unix.stackexchange.com/questions/373187/
+! Configure xterm.
+! Every option in this file should start with `xterm`.
+! Load it with `xrdb -merge /path/to/this/file`.
+! Please note that `xrdb` does not allow unmatched single or double quotes
+! on a commented line: https://unix.stackexchange.com/questions/373187/.
  
 ! Set the TERM environment variable
 xterm*termName: xterm-256color
@@ -25,10 +27,25 @@ xterm*loginshell: true
 ! Add a lot of scrollback
 xterm*saveLines: 4096
 
+! Do not show a scrollbar
+xterm*ScrollBar: false
+
 ! Use double-click to select whole URLs
 xterm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 
-! Use DOS-box-like colors
+! Stop output to terminal from jumping down to bottom of scroll again
+xterm*scrollTtyOutput: false
+
+! Always display 'xterm' as xterm title
+xterm*allowTitleOps: false
+
+! Make xterm transparent
+xterm*transparent: true
+
+! Turn off xterm visual bell
+xterm*visualBell: false
+
+! A theme for xterm: DOS-box-like colors
 xterm*foreground: rgb:a8/a8/a8
 xterm*background: rgb:00/00/00
 xterm*color0: rgb:00/00/00
@@ -48,23 +65,7 @@ xterm*color13: rgb:fc/54/fc
 xterm*color14: rgb:54/fc/fc
 xterm*color15: rgb:fc/fc/fc
 
-! Do not show a scrollbar
-xterm*ScrollBar: false
-
-! Stop output to terminal from jumping down to bottom of scroll again
-xterm*scrollTtyOutput: false
-
-! Always display 'xterm' as xterm title
-xterm*allowTitleOps: false
-
-! Make xterm transparent
-xterm*transparent: true
-
-! Turn off xterm visual bell
-xterm*visualBell: false
-
-
-!! Molokai theme
+! An alternative theme for xterm: Molokai
 !xterm*background: #101010
 !xterm*foreground: #d0d0d0
 !xterm*cursorColor: #d0d0d0
@@ -85,9 +86,8 @@ xterm*visualBell: false
 !xterm*color14: #4eb4fa
 !xterm*color15: #d0d0d0
 
-
-!! Another theme
-!!Blacks
+! An alternative theme for xterm
+!! Blacks
 !xterm*color0:  #151515
 !xterm*color8:  #505450
 !! Reds

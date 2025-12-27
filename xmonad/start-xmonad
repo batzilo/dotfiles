@@ -143,8 +143,8 @@ ssh-add ~/.ssh/id_rsa
 
 # Apply Kurt settings.
 if [ $(hostname) == "kurt" ]; then
-	# Set the theme.
-	change_theme default
+	# Set the xterm/urxvt theme.
+	# change_theme default
 
 	# Configure the screen resolution.
 	xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal

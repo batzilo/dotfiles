@@ -1,4 +1,8 @@
-!! Drop-in Solarized colorscheme for Xresources/Xdefaults
+! Configure urxvt colors with the Solarized colorscheme.
+! Every option in this file should start with `URxvt`.
+! Load it with `xrdb -merge /path/to/this/file`.
+! Please note that `xrdb` does not allow unmatched single or double quotes
+! on a commented line: https://unix.stackexchange.com/questions/373187/.
 
 !! To choose between light/dark background, you have two options:
 !!

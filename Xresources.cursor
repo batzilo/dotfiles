@@ -1,3 +1,9 @@
+! Configure the X cursor.
+! Every option in this file should start with `Xcursor`.
+! Load it with `xrdb -merge /path/to/this/file`.
+! Please note that `xrdb` does not allow unmatched single or double quotes
+! on a commented line: https://unix.stackexchange.com/questions/373187/.
+
 ! Xcursor.theme: Simple-and-Soft
 Xcursor.theme: ogygen
 Xcursor.size: 16

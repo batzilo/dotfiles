@@ -1,17 +1,63 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
-# Set the theme.
-#
-# The changes take effect on the next
-# terminal emulator that you run under X.
+# Set an xterm/urxvt theme via Xresources.
+# The changes take effect on the next terminal emulator that you run under X.
 #
 
 # fail early and loudly
 set -e
 
-# Persist the current selected theme on disk so that
-# all new terminal emulators and shells can read it.
-THEME_FILE=~/.theme
+function apply_theme_default {
+	# Set the colors for xterm.
+	# xrdb $HOME/src/dotfiles/Xresources.xterm
+
+	# Set the colors for urxvt.
+	# xrdb $HOME/src/dotfiles/Xresources.urxvt
+
+	# Set the colors for vim.
+	# sed -i 's/^set background=.*/set background=dark/' $HOME/src/dotfiles/vimrc
+	# sed -i 's/^colorscheme.*/colorscheme mustang/' $HOME/src/dotfiles/vimrc
+
+	:
+}
+
+function apply_theme_solarized_light {
+	# Set the colors for xterm.
+	# xrdb $HOME/src/dotfiles/Xresources.xterm
+	# xrdb -DSOLARIZED_LIGHT -merge $HOME/src/dotfiles/Xresources.xterm.solarized
+
+	# Set the colors for urxvt.
+	# xrdb $HOME/src/dotfiles/Xresources.urxvt
+	# xrdb -DSOLARIZED_LIGHT -merge $HOME/src/dotfiles/Xresources.urxvt.solarized
+
+	# Set the colors for vim.
+	# sed -i 's/^set background=.*/set background=light/' $HOME/src/dotfiles/vimrc
+	# sed -i 's/^colorscheme.*/colorscheme solarized/' $HOME/src/dotfiles/vimrc
+
+	# Does not work :(
+	# sed -i 's/"userTheme":.*/"userTheme":"light"/' $HOME/.config/Slack/storage/slack-settings
+
+	:
+}
+
+function apply_theme_solarized_dark {
+	# Set the colors for xterm.
+	# xrdb $HOME/src/dotfiles/Xresources.xterm
+	# xrdb -DSOLARIZED_DARK -merge $HOME/src/dotfiles/Xresources.xterm.solarized
+
+	# Set the colors for urxvt.
+	# xrdb $HOME/src/dotfiles/Xresources.urxvt
+	# xrdb -DSOLARIZED_DARK -merge $HOME/src/dotfiles/Xresources.urxvt.solarized
+
+	# Set the colors for vim.
+	# sed -i 's/^set background=.*/set background=dark/' $HOME/src/dotfiles/vimrc
+	# sed -i 's/^colorscheme.*/colorscheme solarized/' $HOME/src/dotfiles/vimrc
+
+	# Does not work :(
+	# sed -i 's/"userTheme":.*/"userTheme":"dark"/' $HOME/.config/Slack/storage/slack-settings
+
+	:
+}
 
 while :
 do
@@ -27,54 +73,26 @@ do
 			;;
 		"default" | "slight" | "sdark")
 			# Change the theme to the selected theme.
-			echo $1 > $THEME_FILE
+			echo "$1" > "$THEME_FILE"
 			break
 			;;
 		*)
 			# Change the theme to default.
-			echo "default"> $THEME_FILE
+			echo "default" > "$THEME_FILE"
 			break
 			;;
 	esac
 	shift || break
 done
 
-function apply_theme_default {
-	# Set the terminal colors.
-	xrdb $HOME/src/dotfiles/Xresources.urxvt
-
-	# Set the vim colors
-	sed -i 's/^set background=.*/set background=dark/' $HOME/src/dotfiles/vimrc
-	sed -i 's/^colorscheme.*/colorscheme mustang/' $HOME/src/dotfiles/vimrc
-}
-
-function apply_theme_solarized_light {
-	# Set the terminal colors.
-	xrdb $HOME/src/dotfiles/Xresources.urxvt
-	xrdb -DSOLARIZED_LIGHT -merge $HOME/src/dotfiles/Xresources.urxvt.solarized
-
-	# Set the vim colors
-	sed -i 's/^set background=.*/set background=light/' $HOME/src/dotfiles/vimrc
-	sed -i 's/^colorscheme.*/colorscheme solarized/' $HOME/src/dotfiles/vimrc
-}
-
-function apply_theme_solarized_dark {
-	# Set the terminal colors.
-	xrdb $HOME/src/dotfiles/Xresources.urxvt
-	xrdb -DSOLARIZED_DARK -merge $HOME/src/dotfiles/Xresources.urxvt.solarized
-
-	# Set the vim colors
-	sed -i 's/^set background=.*/set background=dark/' $HOME/src/dotfiles/vimrc
-	sed -i 's/^colorscheme.*/colorscheme solarized/' $HOME/src/dotfiles/vimrc
-
-	# Does not work :(
-	# sed -i 's/"userTheme":"light"/"userTheme":"dark"/' $HOME/.config/Slack/storage/slack-settings
-}
+# Persist the current selected theme on disk so that
+# all new terminal emulators and shells can read it.
+THEME_FILE="$HOME/.theme"
 
 theme="default"
-[ -r $THEME_FILE ] && theme=$(< $THEME_FILE )
+[ -r "$THEME_FILE" ] && theme=$(< "$THEME_FILE")
 
-case $theme in
+case "$theme" in
 	default)
 		apply_theme_default
 		;;
