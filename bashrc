@@ -135,18 +135,18 @@ if [ -d "$HOME/.bin" ]; then
 	pathadd "$HOME/.bin"
 fi
 
-# Setup Python development.
+# Set up the Python development environment.
 pydev() {
 	export PYENV_ROOT="$HOME/src/pyenv"
 
 	# Grab pyenv and pyenv-virtualenv code, if needed.
-	if [ ! -d $PYENV_ROOT ]; then
-		git clone git@github.com:pyenv/pyenv.git $PYENV_ROOT
-		pushd $PYENV_ROOT
+	if [ ! -d "$PYENV_ROOT" ]; then
+		git clone git@github.com:pyenv/pyenv.git "$PYENV_ROOT"
+		pushd "$PYENV_ROOT"
 		src/configure
 		make -C src
 		popd
-		git clone git@github.com:pyenv/pyenv-virtualenv.git $PYENV_ROOT/plugins/pyenv-virtualenv
+		git clone git@github.com:pyenv/pyenv-virtualenv.git "$PYENV_ROOT"/plugins/pyenv-virtualenv
 	fi
 
 	pathadd "$PYENV_ROOT/bin"
