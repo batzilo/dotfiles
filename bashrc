@@ -214,13 +214,9 @@ alias grid='git rebase -i develop'
 # Make less display the search result in the center rather than on top.
 # export LESS=-j.5
 
-# Add xterm transparency.
-if [ -n "$XTERM_VERSION" ]; then
-	transset 0.8 --id "$WINDOWID" >/dev/null
-fi
-# Add urxvt transparency.
+# If the terminal emulator supports TrueColor, add transparency.
 if [ -n "$COLORTERM" ]; then
-	transset 0.8 --id "$WINDOWID" >/dev/null
+	transset 0.95 --id "$WINDOWID" >/dev/null
 fi
 
 #
