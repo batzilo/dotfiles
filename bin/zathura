@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # Run Zathura by overriding the path to the configuration file.
 # The confirugation file is: $HOME/zathurarc (note, there's no dot)
