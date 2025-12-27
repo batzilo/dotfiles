@@ -60,6 +60,8 @@ echo
 
 echo -e 'hyperlink: \e]8;;http://askubuntu.com\e\\hyperlink\e]8;;\e\\'
 
+echo -e 'another hyperlink: https://en.wikipedia.org/wiki/Central_processing_unit'
+
 echo -e '\e[0m'
 
 # Notes:
