@@ -27,3 +27,6 @@ bin/dropbox
 # Ignore the vim plugins
 vim/autoload
 vim/plugged
+
+# Ignore the fonts UUID file.
+fonts/.uuid
