@@ -27,7 +27,19 @@ Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 " Switch from syntastic to ALE
 " Plug 'https://github.com/vim-syntastic/syntastic'
 Plug 'dense-analysis/ale'
+Plug 'vim-airline/vim-airline'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sensible'
+Plug 'preservim/nerdcommenter'
+"Plug 'Valloric/MatchTagAlways'
+"Plug 'ycm-core/YouCompleteMe'
+Plug 'lambdalisue/vim-battery'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+" Plug 'godlygeek/tabular'
+" Plug 'preservim/vim-markdown'
 " Plug 'https://github.com/nvie/vim-flake8'
+Plug 'airblade/vim-gitgutter'
 
 " Next line automatically executes `filetype plugin indent on` and `syntax enable`.
 call plug#end()
@@ -39,6 +51,26 @@ call plug#end()
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+" Don't let ctrlp go all the way up to the root, stop when a METADATA file is found.
+" let g:ctrlp_root_markers = ['METADATA']
+" Restrict ctrlp to only directories from where I ran vim
+" let g:ctrlp_working_path_mode = 0
+" Use the Silver Searcher with ctrlp
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " ag is fast enough that ctrlp doesn't need to cache
+  let g:ctrlp_use_caching = 0
+  let g:ackprg = 'ag --vimgrep'
+endif
+" Use rg with ctrlp
+if executable('rg')
+  set grepprg=rg\ --hidden\ --color=never
+  let g:ctrlp_user_command = 'rg --files --hidden --color=never * %s'
+  " rg is fast enough that ctrlp doesn't need to cache
+  let g:ctrlp_use_caching = 0
+  let g:ackprg = 'rg --vimgrep --smart-case'
+endif
 
 " nerdtree
 " Start NERDTree when Vim is started without file arguments or when Vim starts with a directory argument.
@@ -64,14 +96,14 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 " let g:flake8_show_in_gutter = 1
 " let g:syntastic_python_checkers = ['flake8']
 
-" ale
+" ALE
 "
 " Documentation: https://github.com/dense-analysis/ale/blob/master/doc/ale.txt
 " enable ale
 let g:ale_enabled = 1
 " always show warning/error messages for all lines
 let g:ale_virtualtext_cursor = 2
-" always display the sign column, even if no warnings/errors
+" always display the sign column ("gutter"), even if no warnings/errors
 let g:ale_sign_column_always = 1
 " echo the warning/error message under cursor
 let g:ale_echo_cursor = 1
@@ -143,13 +175,13 @@ set hidden
 
 " Disable background color erase
 " Vim extends the color scheme's background color to the whole terminal screen
-set t_ut=
+"set t_ut=
 
 " Enable 256 colors in vim
-set t_Co=256
+" set t_Co=256
 
 " Unsure what this does
-set t_Cs=
+"set t_Cs=
 
 " Set the width of a TAB to 8 spaces, but still it is a \t
 set tabstop=8
@@ -171,6 +203,9 @@ set cpoptions+=$
 
 " Disable mouse support
 set mouse=
+" Enable Vim's internal mouse handling
+" FIXME: this breaks select-and-copy within tmux within terminal emulator?
+"set mouse=a
 
 " Disable beeping (aka "bell") and window flashing
 set noerrorbells visualbell t_vb=
@@ -179,7 +214,14 @@ set noerrorbells visualbell t_vb=
 let g:netrw_dirhistmax = 0
 
 " Enable spell checking
-set spelllang=en_us,el
+" Check with:
+" :set spell?
+" :set spelllang?
+" Check why a word is highlighted with: z=
+" Add a word to your personal dictionary with: zg
+" Mark a word as explicitly wrong with: zw
+" Inspect your own personal word list: vim ~/.vim/spell/en.utf-8.add
+set spelllang=en_us,en_gb,el
 set spellfile=~/.vim/spell/en.utf-8.add
 set spell
 
@@ -188,38 +230,42 @@ set spell
 " Fold based on indent
 " set foldmethod=indent
 " Do not fold by default
-" set nofoldenable
+set nofoldenable
 " The number of | or numbers displayed
 " set foldcolumn=1
 " The deepest fold is 10 levels
 " set foldnestmax=10
-set foldmethod=manual
+" set foldmethod=manual
 
 
 
 " Colors
 
+" Enable truecolor
+set termguicolors
+
 " Highlight trailing whitespace in red
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd BufWinLeave * call clearmatches()
+" highlight ExtraWhitespace ctermbg=red guibg=red
+" match ExtraWhitespace /\s\+$/
+" autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+" autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+" autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+" autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+" autocmd BufWinLeave * call clearmatches()
 
 " Set the Normal group background terminal color to none
 " so that vim has the same transparency as xterm
-highlight Normal ctermbg=none
+" highlight Normal ctermbg=none
 
 " Set the color scheme
-set background=light
-let g:solarized_termcolors=256
+" set background=dark
+"let g:solarized_termcolors=256
 " colorscheme mustang
 " colorscheme xoria256
-" colorscheme mustang
-" colorscheme monokai
-colorscheme solarized
+colorscheme monokai
+
+" Set the Sign Column ("Gutter") color same as line column colors.
+highlight clear SignColumn
 
 
 
@@ -244,6 +290,10 @@ autocmd FileType sh setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab no
 autocmd FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab nospell
 
 " Java
+" If you prefer using a _non-distributed_ `markdown.vim`,
+" disable the recognition of Markdown comments in Java files:
+" https://github.com/vim/vim/issues/16349
+let g:java_ignore_markdown = 1
 autocmd FileType java setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab nospell
 
 " Groovy
@@ -264,3 +314,8 @@ autocmd FileType xml setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab nos
 " ASTRA
 autocmd BufNewFile,BufRead *.astra set filetype=astra
 autocmd FileType astra setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab nospell
+
+" Markdown
+" Force correct syntax highlighting when opening a large Markdown file and
+" jumping right to the end.
+autocmd FileType markdown syntax sync fromstart
