@@ -8,7 +8,7 @@
 # Instead, use symbolic links.
 #
 # Usage:
-# $ ./install_dotfiles.sh [-v] [-i] [-f]
+# $ ./install_dotfiles.sh [-v] [-i]
 # Make sure you run this script from within this git repo.
 #
 
@@ -53,6 +53,31 @@ DOTDIRS="      \
 : "${TARGET_USER:=$(whoami)}"
 SRC_DIR="$(pwd)"
 DST_DIR="/home/$TARGET_USER"
+INTERACTIVE=0
+
+# Prompt helper: ask the user for confirmation when interactive mode is enabled.
+# Returns 0 when the user answered yes (or when not in interactive mode),
+# returns 1 when the user answered no.
+ask_user_confirm() {
+    local prompt_msg="$1"
+
+    # If not in interactive mode, proceed without prompting.
+    if [ "$INTERACTIVE" != "1" ]; then
+        return 0
+    fi
+
+    local ans
+    # Default answer is No.
+    read -r -p "$prompt_msg [y/N] " ans
+    case "$ans" in
+        [yY]|[yY][eE][sS])
+            return 0
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+}
 
 while :
 do
@@ -60,6 +85,10 @@ do
 		"-v" | "--verbose")
 			# Be verbose.
 			set -x
+			;;
+		"-i" | "--interactive")
+			# Interactive mode: prompt before creating each symbolic link.
+			INTERACTIVE=1
 			;;
 		*)
 			;;
@@ -93,6 +122,11 @@ create_symblic_link_for_file () {
 			return
 		fi
 	fi
+	# If in interactive mode, ask the user before creating a symbolic link.
+	if ! ask_user_confirm "Create symlink $DST_DOTFILE -> $SRC_DOTFILE?"; then
+		echo "Skipping $DST_DOTFILE."
+		return
+	fi
 	echo "Creating a symbolic link for $DST_DOTFILE"
 	ln -s -i "$SRC_DOTFILE" "$DST_DOTFILE" || echo "Failed to create a symbolic link for $DST_DOTFILE"
 	# Change the ownership of the symbolic link.
@@ -112,6 +146,11 @@ create_symblic_link_for_dir () {
 	if [ -d "$DST_DOTDIR" ]; then
 		# Directory already exists, skip.
 		echo "$DST_DOTDIR: already exists, skipping."
+		return
+	fi
+	# If in interactive mode, ask the user before creating a symbolic link.
+	if ! ask_user_confirm "Create symlink $DST_DOTDIR -> $SRC_DOTDIR?"; then
+		echo "Skipping $DST_DOTDIR."
 		return
 	fi
 	echo "Creating a symbolic link for $DST_DOTDIR"
