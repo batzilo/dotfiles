@@ -26,7 +26,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 " Switch from syntastic to ALE
 " Plug 'https://github.com/vim-syntastic/syntastic'
-Plug 'dense-analysis/ale'
+" Plug 'dense-analysis/ale'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
@@ -257,12 +257,13 @@ set termguicolors
 " so that vim has the same transparency as xterm
 " highlight Normal ctermbg=none
 
-" Set the color scheme
-" set background=dark
-"let g:solarized_termcolors=256
-" colorscheme mustang
-" colorscheme xoria256
-colorscheme monokai
+" Set the color theme: solarized8 is just better solarized.
+" To use a Solarized 8 color scheme,
+" first set the background (either dark or light)
+" and then load the color theme:
+set background=light
+colorscheme solarized8
+" Taken from https://github.com/lifepillar/vim-solarized8
 
 " Set the Sign Column ("Gutter") color same as line column colors.
 highlight clear SignColumn
