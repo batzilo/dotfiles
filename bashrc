@@ -237,4 +237,6 @@ fi
 # Set up SDKMAN.
 export SDKMAN_DIR="$HOME/.sdkman"
 export SDKMAN_INIT_SH="$SDKMAN_DIR/bin/sdkman-init.sh"
-[[ -s "$SDKMAN_INIT_SH" ]] && source "$SDKMAN_INIT_SH"
+if [[ -s "$SDKMAN_INIT_SH" ]]; then
+	source "$SDKMAN_INIT_SH"
+fi
